@@ -38,7 +38,7 @@ app.post('/agregar-cliente',async function (req, res) {
    console.log(client);
    await connectBD();
    let result = await addClients(client)
-   res.send('hola estas en listar-clientes');
+   // res.send('hola estas en listar-clientes');
    console.log("hola estas en listar-clientes");
    res.send(result);
 })
@@ -55,6 +55,16 @@ app.get('/eliminar-cliente', function (req, res) {
 app.get('/modificar-cliente', function (req, res) {
    res.send('hola estas en listar-clientes');
    console.log("hola estas en listar-clientes");
+})
+
+
+// categorias
+app.get('/ver-categorias', async function  (req, res) {
+   console.log("hola estas en ver-categorias");
+   await connectBD();
+   let resultadoDB = await getCategories();
+   console.log(resultadoDB);
+   res.send(resultadoDB);
 })
 
 
@@ -105,6 +115,19 @@ function getClients() {
    });
 }
 
+
+function getCategories() {
+   return new Promise((resolve, reject) => {
+       let sql = `SELECT *
+                    FROM categorias`;
+       global.dbp.any(sql)
+         .then(res => {
+           return resolve(res);
+         }).catch(err => {
+           return reject(err);
+       });
+   });
+}
 
 function addClients(cliente) {
    console.log('llamaste a addclient');
