@@ -28,6 +28,11 @@ export class RestService {
     return this.http.get(this.url+'ver-clientes').pipe(map(res => res));
   }
 
+  
+  getMostrarCategoriaDB():Observable<any> {
+    console.log(this.url+'ver-categorias')
+    return this.http.get(this.url+'ver-categorias').pipe(map(res => res));
+  }
 
   getMostrarProducto() {
     console.log(this.url+'mostrar-producto')

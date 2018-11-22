@@ -28,6 +28,13 @@
             </label>
         </div>
         <div>
+            <select name="categorias">
+                <option value="" #categ_producto *ngFor="let categoria of categorias">
+                    {{ categoria.nombre_categoria }}
+                </option>
+            </select>
+        </div>
+        <div>
             <button >  
                 Crear Usuario
             </button>

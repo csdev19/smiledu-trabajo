@@ -24,6 +24,8 @@ export class Clientes {
     clientes3;
     cliente: Object;
     productos: Array<Object>;
+    categorias:any = [];
+    
     clientes: Persona[] = [
         {
             'nombre': 'Cristian',
@@ -66,8 +68,13 @@ export class Clientes {
         //         this.clientes2 = clientes2;
         //     });
         
-            
-        // this.restService.getMostrarClienteDB()
+        
+        this.restService.getMostrarCategoriaDB()
+            .subscribe(categorias => {
+                this.categorias = categorias;
+            });
+        
+                // this.restService.getMostrarClienteDB()
         //     .subscribe(clientes3 => {
         //         console.log(typeof clientes3);
         //         console.log(clientes3);
