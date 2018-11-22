@@ -1,9 +1,10 @@
+
 <div>
-    <form (submit)='agregarCliente(nombre,apellido,edad,correo)'> 
+    <form method="" (submit)='agregarCliente(nombre,apellido,edad,correo)'> 
         <div>
             <label for="">
                 Nombre
-                <input type="text" #nombre>
+                <input type="text" #nombre >
             </label> 
         </div>
         <div>
@@ -33,28 +34,57 @@
         </div>
     </form>
 
-    <table>
-        <tr>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Edad</th>
+    <!-- 
+
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
             <th>Correo</th>
+            <th>Fecha de nacimiento</th>
             <th>Boton del</th>
         </tr>
-        <tr *ngFor="let cliente of clientes">
+        <tr *ngFor="let cliente of clientes3">
             <td>
-                {{ cliente.nombre }}
+                {{ cliente.id_cliente }}
             </td>
             <td>
-                {{ cliente.apellido }}
+                {{ cliente.nombres }}
             </td>
             <td>
-                {{ cliente.edad }}
+                {{ cliente.apellidos }}
             </td>
             <td>
                 {{ cliente.correo }}
             </td>
+            <td>
+                {{ cliente.fecha_nacimiento }}
+            </td>
             <button (click)="eliminarCliente(cliente)">Eliminar</button>
         </tr>
     </table>
+    
+
+    
+    <table>
+        <tr>
+            <th>Nombre Producto</th>
+            <th>Fecha compra</th>
+            <th>precio</th>
+        </tr>
+        <tr *ngFor="let producto of productos">
+            <td>
+                {{ producto.nombre_producto }}
+            </td>
+            <td>
+                {{ producto.fecha_compra }}
+            </td>
+            <td>
+                {{ producto.precio }}
+            </td>
+            <button (click)="eliminarCliente(cliente)">Eliminar</button>
+        </tr>
+    </table>    
+    -->
 </div>

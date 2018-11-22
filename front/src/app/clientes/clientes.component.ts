@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { RestService } from '../rest.service';
+//import { Observable } from 'rxjs/Observable';
+import { Observable } from "rxjs";
+import { map } from 'rxjs/operators';
+import { providerDef } from '@angular/core/src/view';
+//import 'rxjs/add/operator/map';
 
 interface Persona {
     nombre: string,
@@ -10,9 +16,14 @@ interface Persona {
 @Component({
     selector: 'clientes',
     templateUrl: './clientes.component.html',
-    styleUrls: ['./clientes.component.css']
+    styleUrls: ['./clientes.component.css'],
+    providers: [RestService]
 })
 export class Clientes {     
+    clientes2: Array<Object>;
+    clientes3;
+    cliente: Object;
+    productos: Array<Object>;
     clientes: Persona[] = [
         {
             'nombre': 'Cristian',
@@ -46,13 +57,58 @@ export class Clientes {
         }
     ]
 
+    constructor (private restService: RestService) {
+        
+        // this.restService.getMostrarCliente()
+        //     .subscribe(clientes2 => {
+        //         console.log(clientes2);
+        //         console.log(typeof clientes2);
+        //         this.clientes2 = clientes2;
+        //     });
+        
+            
+        // this.restService.getMostrarClienteDB()
+        //     .subscribe(clientes3 => {
+        //         console.log(typeof clientes3);
+        //         console.log(clientes3);
+        //         this.clientes3 = clientes3;
+        //     });
+            
+        // this.restService.getMostrarProducto()
+        //     .subscribe(productos => {
+        //         console.log(productos);
+        //         this.productos = productos;
+        //     });
+    }
+    
+    obtenerCliente() {
+
+    }
+
     agregarCliente(nombre, apellido, edad, correo) {
-        this.clientes.push({
+        let cliente = {
             'nombre': nombre.value,
             'apellido': apellido.value,
             'edad': edad.value,
             'correo': correo.value
-        });
+        };
+
+        console.log(cliente);
+
+        this.restService.agregarCliente(cliente).subscribe(
+            result => {
+                console.log(result);
+            }, 
+            error => {
+                console.log(error);
+            }
+        )
+        //     .subscribe(clientes => {
+        //         console.log(typeof cliente);
+        //         console.log(cliente);
+        //         this.cliente = cliente;
+        //     });
+        // console.log(cliente);
         nombre.value = '';
         apellido.value = '';
         edad.value = '';

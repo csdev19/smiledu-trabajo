@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
-import { Observable, of } from "rxjs";
-import { map, catchError, tap } from "rxjs/operators";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+//import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
+//import { Observable, of } from "rxjs";
+//import { map, catchError, tap } from "rxjs/operators";
+//import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +16,63 @@ export class RestService {
 
   }
 
-  private extractData(res: Response) {
-    let body = res;
-    return body || { };
-  }
-
+  
   getMostrarCliente() {
     console.log(this.url+'mostrar-cliente')
-    this.http.get(this.url+'mostrar-cliente').subscribe(row=> {
-      console.log(row);
-    },err => {
-      console.log(err);
-    })
+    return this.http.get(this.url+'mostrar-cliente').pipe(map(res => res));
   }
+
+  
+  getMostrarClienteDB() {
+    console.log(this.url+'ver-clientes')
+    return this.http.get(this.url+'ver-clientes').pipe(map(res => res));
+  }
+
+
+  getMostrarProducto() {
+    console.log(this.url+'mostrar-producto')
+    return this.http.get(this.url+'mostrar-producto').pipe(map(res => res));
+  }
+
+
+  // AGREGAR
+  // agregarCliente(nuevoCliente) {
+  //   return this.http.post(`${this.url}/agregar-cliente`, nuevoCliente)
+  //     .pipe(map(res => res));
+  // }
+
+  agregarCliente(nuevoCliente): Observable<any> {
+    console.log("llamaste a la api");
+    return this.http.post(`${this.url}agregar-cliente`, nuevoCliente, httpOptions)
+      // .pipe(map(res => {
+      //   console.log('entre');
+      //   return res;
+      // }));
+  }
+  eliminarCliente(id) {
+    return this.http.delete(`${this.url}/api/tasks/${id}`)
+      .pipe(map(res => res));
+  }
+
+  // actualizarCliente(nuevoCliente) {
+  //   return this.http.put(`${this.url}/api/tasks/${nuevoCliente._id}`, nuevoCliente)
+  //     .pipe(map(res => res));
+  // }
+  
 }
 
-const endpoint = 'http://localhost:3000/api/v1/';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json'
   })
 };
+
+
+  // getMostrarCliente() {
+  //   console.log(this.url+'mostrar-cliente')
+  //   this.http.get(this.url+'mostrar-cliente').subscribe(row=> {
+  //     console.log(row);
+  //   },err => {
+  //     console.log(err);
+  //   })
+  // }
