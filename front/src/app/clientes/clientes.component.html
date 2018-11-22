@@ -1,0 +1,60 @@
+<div>
+    <form (submit)='agregarCliente(nombre,apellido,edad,correo)'> 
+        <div>
+            <label for="">
+                Nombre
+                <input type="text" #nombre>
+            </label> 
+        </div>
+        <div>
+
+            <label for="">
+                apellido
+                <input type="text" #apellido>
+            </label>
+        </div>
+        <div>
+
+            <label for="">
+                edad
+                <input type="text" #edad>
+            </label>
+        </div>
+        <div>
+            <label for="">
+                correo
+                <input type="email" #correo name="" id="">
+            </label>
+        </div>
+        <div>
+            <button >  
+                Crear Usuario
+            </button>
+        </div>
+    </form>
+
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Edad</th>
+            <th>Correo</th>
+            <th>Boton del</th>
+        </tr>
+        <tr *ngFor="let cliente of clientes">
+            <td>
+                {{ cliente.nombre }}
+            </td>
+            <td>
+                {{ cliente.apellido }}
+            </td>
+            <td>
+                {{ cliente.edad }}
+            </td>
+            <td>
+                {{ cliente.correo }}
+            </td>
+            <button (click)="eliminarCliente(cliente)">Eliminar</button>
+        </tr>
+    </table>
+</div>
