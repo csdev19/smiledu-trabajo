@@ -1,51 +1,46 @@
-var express = require('express'),
-    cors = require('cors');
-var app = express();
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const db = require('./config/db');
 
-var bodyParser = require('body-parser');
+// import querys
+const client_q = require('./clients/client_query')
+const category_q = require('./categories/categories_query')
+const venta_q = require('./sales/sales_query')
+const product_q = require('./products/product_query')
+
+
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cors());
+
+
 app.get('/', function (req, res) {
    res.send('Hello');
-})
-
- app.get('/mostrar-cliente', function (req, res) {
-   
-   res.send(data);
-   console.log('llegue'+data);
-})
-
-app.get('/mostrar-productos', function (req, res) {
-   res.send(productos);
-   console.log('llegue'+productos);
 })
 
 
 app.get('/ver-clientes', async function  (req, res) {
    console.log("hola estas en ver-clientes");
-   await connectBD();
-   let resultadoDB = await getClients();
-   console.log(resultadoDB);
+   await db.connectBD();
+   let resultadoDB = await client_q.getClients();
+   // console.log(resultadoDB);
    res.send(resultadoDB);
 })
 
 
 // POST METHOD
-app.post('/agregar-cliente',async function (req, res) {
+app.post('/agregar-clientes',async function (req, res) {
    console.log('client');
    let client = req.body;
    console.log(client);
-   await connectBD();
-   let result = await addClients(client)
+   await db.connectBD();
+   let result = await client_q.addClients(client)
    // res.send('hola estas en listar-clientes');
-   console.log("hola estas en listar-clientes");
+   console.log("hola estas en agregar-clientes");
    res.send(result);
 })
-
-
-
-
 
 app.get('/eliminar-cliente', function (req, res) {
    res.send('hola estas en listar-clientes');
@@ -58,14 +53,48 @@ app.get('/modificar-cliente', function (req, res) {
 })
 
 
-// categorias
+
+//           CATEGORIA
 app.get('/ver-categorias', async function  (req, res) {
    console.log("hola estas en ver-categorias");
-   await connectBD();
-   let resultadoDB = await getCategories();
-   console.log(resultadoDB);
+   await db.connectBD();
+   let resultadoDB = await category_q.getCategories();
+   // console.log(resultadoDB);
    res.send(resultadoDB);
 })
+
+
+//             VENTA
+// POST METHOD
+app.post('/crear-venta',async function (req, res) {
+   console.log('client');
+   let venta = req.body;
+   // console.log(venta);
+   await db.connectBD();
+   let result = await venta_q.crearVenta(venta)
+   // res.send('hola estas en listar-ventaes');
+   console.log("hola estas en crear-venta");
+   res.send(result);
+})
+
+app.get('/ver-ventas', async function  (req, res) {
+   console.log("hola estas en ver-ventas");
+   await db.connectBD();
+   let resultadoDB = await venta_q.verVentasMejor();
+   // console.log(resultadoDB);
+   res.send(resultadoDB);
+})
+
+
+// productos
+app.get('/ver-productos', async function  (req, res) {
+   console.log("hola estas en ver-productos");
+   await db.connectBD();
+   let resultadoDB = await product_q.getProducts();
+   // console.log(resultadoDB);
+   res.send(resultadoDB);
+})
+
 
 
 var server = app.listen(8081, function () {
@@ -75,77 +104,3 @@ var server = app.listen(8081, function () {
    console.log("Example app listening at http://%s:%s", host, port)
 })
 
-
-
-function connectBD() {
-   let bd = require('./database.json');
-   let __database = 'comercio';
-   let bd_user = bd.user;
-   let bd_host = bd.host;
-   let bd_port = bd.port;
-   let bd_pass = bd.pass;
-   if(!global.pgpromise) {
-       global.pgpromise = require("pg-promise")({
-           noWarnings : false
-       });
-   }
-   let __conexion = 'postgres://'+bd_user+':'+bd_pass+'@'+bd_host+':'+bd_port+'/'+__database;
-   if(global.dbp) {
-       let connString = global.dbp.$pool.options.connectionString;
-       if(!connString.includes(__database) || global.dbp.$pool.ending ) {
-           global.dbp = pgpromise(__conexion);
-       }
-   } else {
-       global.dbp = pgpromise(__conexion);
-   }
-}
-
-
-function getClients() {
-   return new Promise((resolve, reject) => {
-       let sql = `SELECT *
-                    FROM clientes`;
-       global.dbp.any(sql)
-         .then(res => {
-           return resolve(res);
-         }).catch(err => {
-           return reject(err);
-
-       });
-   });
-}
-
-
-function getCategories() {
-   return new Promise((resolve, reject) => {
-       let sql = `SELECT *
-                    FROM categorias`;
-       global.dbp.any(sql)
-         .then(res => {
-           return resolve(res);
-         }).catch(err => {
-           return reject(err);
-       });
-   });
-}
-
-function addClients(cliente) {
-   console.log('llamaste a addclient');
-   console.log(cliente);
-   return new Promise((resolve, reject) => {
-       let sql = `INSERT INTO public.clientes(
-                     nombres, apellidos, fecha_nacimiento, correo, direccion)
-                     VALUES ($1, $2, $3, $4, $5);`;
-       global.dbp.none(sql, [cliente['nombre'], cliente['apellido'], cliente['fecha_nac'], cliente['correo'], cliente['direccion']])
-         .then(res => {
-         //   return resolve(res);
-            // ahora deberiamos decir si funciono 
-            console.log('funciono'+res);
-            return 'Funciono';
-         }).catch(err => {
-         //   return reject(err);
-            console.log(err);
-            return 'Hubo un error';
-         });
-   });
-}
