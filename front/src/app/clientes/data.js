@@ -1,19 +1,5 @@
-import { Component } from '@angular/core';
 
-interface Persona {
-    nombre: string,
-    apellido: string,
-    edad: number,
-    correo: string
-}
-
-@Component({
-    selector: 'clientes',
-    templateUrl: './clientes.component.html',
-    styleUrls: ['./clientes.component.css']
-})
-export class Clientes {     
-    clientes: Persona[] = [
+    clientes: Persona = [
         {
             'nombre': 'Cristian',
             'apellido': 'sotomayor',
@@ -45,6 +31,3 @@ export class Clientes {
             'correo': 'allison@gmail.com'
         }
     ]
-
-    
-}

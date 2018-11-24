@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
   informacion;
 
   ngOnInit(): void {
-    this.informacion = this._service.getMostrarCliente();
+    // this.informacion = this._service.getMostrarClienteDB();
 
   }
   title = 'front';

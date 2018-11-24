@@ -17,13 +17,13 @@ export class RestService {
   }
 
   
-  getMostrarCliente() {
-    console.log(this.url+'mostrar-cliente')
-    return this.http.get(this.url+'mostrar-cliente').pipe(map(res => res));
-  }
+  // getMostrarCliente() {
+  //   console.log(this.url+'mostrar-cliente')
+  //   return this.http.get(this.url+'mostrar-cliente').pipe(map(res => res));
+  // }
 
   
-  getMostrarClienteDB() {
+  getMostrarClienteDB():Observable<any> {
     console.log(this.url+'ver-clientes')
     return this.http.get(this.url+'ver-clientes').pipe(map(res => res));
   }
@@ -34,13 +34,18 @@ export class RestService {
     return this.http.get(this.url+'ver-categorias').pipe(map(res => res));
   }
 
-  getMostrarProducto() {
-    console.log(this.url+'mostrar-producto')
-    return this.http.get(this.url+'mostrar-producto').pipe(map(res => res));
+  getMostrarProductoDB():Observable<any> {
+    console.log(this.url+'ver-productos')
+    return this.http.get(this.url+'ver-productos').pipe(map(res => res));
   }
 
+  getMostrarVentasDB():Observable<any> {
+    console.log(this.url+'ver-ventas')
+    return this.http.get(this.url+'ver-ventas').pipe (map(res => res));
+  }
 
   // AGREGAR
+
   // agregarCliente(nuevoCliente) {
   //   return this.http.post(`${this.url}/agregar-cliente`, nuevoCliente)
   //     .pipe(map(res => res));
@@ -64,7 +69,18 @@ export class RestService {
   //     .pipe(map(res => res));
   // }
   
+  crearVenta(venta): Observable<any> {
+    console.log("llamaste a la api venta");
+    return this.http.post(`${this.url}crear-venta`, venta, httpOptions)
+  }
+
+  
+
+  
 }
+
+
+
 
 const httpOptions = {
   headers: new HttpHeaders({

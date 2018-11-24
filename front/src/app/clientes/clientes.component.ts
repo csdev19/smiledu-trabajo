@@ -20,64 +20,23 @@ interface Persona {
     providers: [RestService]
 })
 export class Clientes {     
-    clientes2: Array<Object>;
     clientes3;
     cliente: Object;
-    productos: Array<Object>;
+    productos;
     categorias:any = [];
-    
-    clientes: Persona[] = [
-        {
-            'nombre': 'Cristian',
-            'apellido': 'sotomayor',
-            'edad': 19,
-            'correo': 'cristian@gmail.com'
-        },
-        {
-            'nombre': 'Maribel',
-            'apellido': 'gonzales',
-            'edad': 50,
-            'correo': 'mari@gmail.com'
-        },
-        {
-            'nombre': 'Luis',
-            'apellido': 'sotomayor',
-            'edad': 45,
-            'correo': 'luis@gmail.com'
-        },
-        {
-            'nombre': 'diego',
-            'apellido': 'sotomayor',
-            'edad': 15,
-            'correo': 'diego@gmail.com'
-        },
-        {
-            'nombre': 'allison',
-            'apellido': 'velasquez',
-            'edad': 20,
-            'correo': 'allison@gmail.com'
-        }
-    ]
+    client_titles: Array<string> = ['id','Nombre','Apellidos','Correo','Fecha de nacimiento','Eliminar']; 
+    product_titles: Array<string> = ['Nombre Producto','Fecha Compra','Precio'];
 
     constructor (private restService: RestService) {
         
-        // this.restService.getMostrarCliente()
-        //     .subscribe(clientes2 => {
-        //         console.log(clientes2);
-        //         console.log(typeof clientes2);
-        //         this.clientes2 = clientes2;
+        
+        // this.restService.getMostrarCategoriaDB()
+        //     .subscribe(categorias => {
+        //         this.categorias = categorias;
         //     });
         
-        
-        this.restService.getMostrarCategoriaDB()
-            .subscribe(categorias => {
-                this.categorias = categorias;
-            });
-        
-                // this.restService.getMostrarClienteDB()
+        // this.restService.getMostrarClienteDB()
         //     .subscribe(clientes3 => {
-        //         console.log(typeof clientes3);
-        //         console.log(clientes3);
         //         this.clientes3 = clientes3;
         //     });
             
@@ -87,6 +46,7 @@ export class Clientes {
         //         this.productos = productos;
         //     });
     }
+
     
     obtenerCliente() {
 
@@ -100,14 +60,14 @@ export class Clientes {
             'correo': correo.value
         };
 
-        console.log(cliente);
+        // console.log(cliente);
 
         this.restService.agregarCliente(cliente).subscribe(
             result => {
-                console.log(result);
+                // console.log(result);
             }, 
             error => {
-                console.log(error);
+                // console.log(error);
             }
         )
         //     .subscribe(clientes => {
@@ -123,13 +83,13 @@ export class Clientes {
         return false;
     }
 
-    eliminarCliente(cliente) {
-        for (let i = 0; i < this.clientes.length; i++) {
-            if (cliente['nombre'] == this.clientes[i]['nombre']) {
-                this.clientes.splice(i, 1);
-                break;
-            }           
-        }
-    }
+    // eliminarCliente(cliente) {
+    //     for (let i = 0; i < this.clientes.length; i++) {
+    //         if (cliente['nombre'] == this.clientes[i]['nombre']) {
+    //             this.clientes.splice(i, 1);
+    //             break;
+    //         }           
+    //     }
+    // }
 
 }

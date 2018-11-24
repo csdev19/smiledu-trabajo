@@ -1,0 +1,25 @@
+    
+<table>
+  <tr>
+    <th *ngFor='let sales_title of sales_titles'>
+        {{ sales_title }}
+    </th>
+  </tr>
+  <tr *ngFor="let venta of ventas">
+    <td>
+      {{ venta.nombre_producto }}
+    </td>
+    <td>
+      {{ venta.nombres }}
+    </td>
+    <td>
+      {{ venta.precio_venta }}
+    </td>
+    <td>
+      {{ venta.fecha_compra }}
+    </td>
+    <!-- <button (click)="eliminarCliente(cliente)">Eliminar</button> -->
+  </tr>
+</table>
+<button (click)="verVentas()">ver</button>
+<!-- <button (click)="setListSales()">ver</button> -->

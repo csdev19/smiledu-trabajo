@@ -1,0 +1,41 @@
+<form *ngIf='seeForm' method="" (submit)='agregarCliente(nombre,apellido,edad,correo,categoria_producto)'> 
+    <div>
+      <label for="">
+        Nombre
+        <input type="text" #nombre >
+      </label> 
+    </div>
+    <div>
+      <label for="">
+        apellido
+        <input type="text" #apellido>
+      </label>
+    </div>
+    <div>
+      <label for="">
+        edad
+        <input type="text" #edad>
+      </label>
+    </div>
+    <div>
+      <label for="">
+        correo
+        <input type="email" #correo name="" id="">
+      </label>
+    </div>
+    <div>
+      <select name="categorias" #categoria_producto>
+        <option value="{{ categoria.nombre_categoria }}"  *ngFor="let categoria of categorias">
+          {{ categoria.nombre_categoria }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <button>  
+          Crear Usuario
+      </button>
+    </div>
+  </form>
+  <button  (click)='isVisible()'>
+      {{ msj }}
+  </button>
