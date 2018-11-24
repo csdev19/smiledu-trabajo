@@ -11,7 +11,10 @@ import { CsFormVentaComponent } from './cs-form-venta/cs-form-venta.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CsTableVentasComponent } from './cs-table-ventas/cs-table-ventas.component';
 import { CsFormCategoriaComponent } from './cs-form-categoria/cs-form-categoria.component';
-import { CsFormProductoComponent } from './cs-form-producto/cs-form-producto.component'
+import { CsFormProductoComponent } from './cs-form-producto/cs-form-producto.component';
+import { CsTableCategoriaComponent } from './cs-table-categoria/cs-table-categoria.component';
+import { CsTableProductoComponent } from './cs-table-producto/cs-table-producto.component';
+import { CsTableUpdateProductoComponent } from './cs-table-update-producto/cs-table-update-producto.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { CsFormProductoComponent } from './cs-form-producto/cs-form-producto.com
     CsFormVentaComponent,
     CsTableVentasComponent,
     CsFormCategoriaComponent,
-    CsFormProductoComponent
+    CsFormProductoComponent,
+    CsTableCategoriaComponent,
+    CsTableProductoComponent,
+    CsTableUpdateProductoComponent
   ],
   imports: [
     BrowserModule,

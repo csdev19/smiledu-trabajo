@@ -92,18 +92,20 @@ export class CsFormVentaComponent implements OnInit {
     };
 
 
-    // console.log(venta);
+    console.log(venta);
     
-    this.restService.crearVenta(venta).subscribe(
-      result => {
-        // console.log(result);
-        return 'work';
-      }, 
-      error => {
-        // console.log(error);
-      }
-      )
+    // this.restService.crearVenta(venta).subscribe(
+    //   result => {
+    //     // console.log(result);
+    //     return 'work';
+    //   }, 
+    //   error => {
+    //     // console.log(error);
+    //   }
+    //   )
     return false;
+
+    
   }
 
 }

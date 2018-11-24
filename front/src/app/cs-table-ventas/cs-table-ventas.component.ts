@@ -19,6 +19,8 @@ export class CsTableVentasComponent implements OnInit {
   productos;
   clientes;
   lista_ventas: Array<Venta>;
+  seeTable: boolean = false;
+  msj: string = 'Mostrar Tabla de Ventas'
   sales_titles: Array<string> = ['id_producto','id_cliente','fecha_compra','precio_venta',]
   
   constructor(private restService: RestService) {
@@ -31,7 +33,16 @@ export class CsTableVentasComponent implements OnInit {
  
       // this.setListSales();
     }
-    
+
+
+    refresh () {
+      this.restService.getMostrarVentasDB()
+      .subscribe(ventas => {
+        this.ventas = ventas;
+        console.log(this.ventas);
+      });
+    }
+
     // for (let row of this.id_productos) {
     //   // console.log(row)
     //   if(row.id_producto == this.id_producto) {
@@ -56,6 +67,11 @@ export class CsTableVentasComponent implements OnInit {
   verVentas(){
 
     console.log(this.ventas);
+  } 
+  isVisible () {
+    this.seeTable = !this.seeTable;
+    this.msj = this.seeTable ? 'Ocultar Tabla de Ventas' : 'Mostrar Tabla de Ventas';
   }
+
   
 }

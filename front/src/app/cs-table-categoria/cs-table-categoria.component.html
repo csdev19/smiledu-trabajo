@@ -1,27 +1,18 @@
 <button (click)="isVisible()">{{ msj }}</button>
 <div *ngIf='seeTable'>
-  <table>
+  <table >
     <tr>
-      <th *ngFor='let sales_title of sales_titles'>
-        {{ sales_title }}
+      <th *ngFor='let categories_title of categories_titles'>
+        {{ categories_title }}
       </th>
     </tr>
-    <tr *ngFor="let venta of ventas">
+    <tr *ngFor="let categoria of categorias">
       <td>
-        {{ venta.nombre_producto }}
-      </td>
-      <td>
-        {{ venta.nombres }}
-      </td>
-      <td>
-        {{ venta.precio_venta }}
-      </td>
-      <td>
-        {{ venta.to_char }}
+        {{ categoria.nombre_categoria }}
       </td>
       <!-- <button (click)="eliminarCliente(cliente)">Eliminar</button> -->
     </tr>
   </table>
   <button (click)="refresh()">Actualizar</button>
   <!-- <button (click)="setListSales()">ver</button> -->
-</div>   
+</div>

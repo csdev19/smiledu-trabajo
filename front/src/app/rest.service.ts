@@ -38,7 +38,11 @@ export class RestService {
     console.log(this.url+'ver-productos')
     return this.http.get(this.url+'ver-productos').pipe(map(res => res));
   }
-
+ 
+  getMostrarProductoTablaDB():Observable<any> {
+    console.log(this.url+'ver-productos-tabla')
+    return this.http.get(this.url+'ver-productos-tabla').pipe(map(res => res));
+  }
   getMostrarVentasDB():Observable<any> {
     console.log(this.url+'ver-ventas')
     return this.http.get(this.url+'ver-ventas').pipe (map(res => res));
@@ -79,6 +83,13 @@ export class RestService {
       //   return res;
       // }));
   }
+
+
+// actualizar
+actualizarProducto(obj): Observable<any> {
+  console.log("llamaste a la api");
+  return this.http.post(`${this.url}actualizar-producto`, obj, httpOptions)
+}
 
 
 

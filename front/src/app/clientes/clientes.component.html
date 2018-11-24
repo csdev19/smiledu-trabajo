@@ -1,104 +1,20 @@
 <div>
-    <app-cs-form-client></app-cs-form-client> 
+    <div class="forms">
+        <app-cs-form-client></app-cs-form-client> 
+        <app-cs-form-venta></app-cs-form-venta>
+        <app-cs-form-producto></app-cs-form-producto>
+        <app-cs-form-categoria></app-cs-form-categoria>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="tables">
+        <app-cs-table-ventas></app-cs-table-ventas>
+        <app-cs-table-categoria></app-cs-table-categoria>
+        <app-cs-table-producto></app-cs-table-producto>
+        <app-cs-table-client></app-cs-table-client>
+    </div>
 
-    <app-cs-form-venta></app-cs-form-venta>
-
-    <app-cs-form-producto></app-cs-form-producto>
-    
-    <app-cs-form-categoria></app-cs-form-categoria>
-    
-    <app-cs-table-ventas></app-cs-table-ventas>
-
-    <!--     
-    <form method="" (submit)='agregarCliente(nombre,apellido,edad,correo)'> 
-        <div>
-            <label for="">
-                Nombre
-                <input type="text" #nombre >
-            </label> 
-        </div>
-        <div>
-
-            <label for="">
-                apellido
-                <input type="text" #apellido>
-            </label>
-        </div>
-        <div>
-
-            <label for="">
-                edad
-                <input type="text" #edad>
-            </label>
-        </div>
-        <div>
-            <label for="">
-                correo
-                <input type="email" #correo name="" id="">
-            </label>
-        </div>
-        <div>
-            <select name="categorias">
-                <option value="" #categ_producto *ngFor="let categoria of categorias">
-                    {{ categoria.nombre_categoria }}
-                </option>
-            </select>
-        </div>
-        <div>
-            <button >  
-                Crear Usuario
-            </button>
-        </div>
-    </form> -->
-
-    
-
-    <!-- <table>
-        <tr>
-            <th *ngFor='let client_title of client_titles'>
-                {{ client_title }}
-            </th>
-        </tr>
-        <tr *ngFor="let cliente of clientes3">
-            <td>
-                {{ cliente.id_cliente }}
-            </td>
-            <td>
-                {{ cliente.nombres }}
-            </td>
-            <td>
-                {{ cliente.apellidos }}
-            </td>
-            <td>
-                {{ cliente.correo }}
-            </td>
-            <td>
-                {{ cliente.fecha_nacimiento }}
-            </td>
-            <button (click)="eliminarCliente(cliente)">Eliminar</button>
-        </tr>
-    </table>
-     -->
-    
-<!--     
-    <table>
-        <tr>
-            <th *ngFor='let product_title of product_titles'>
-                {{ product_title }}
-            </th>
-        </tr>
-        <tr *ngFor="let producto of productos">
-            <td>
-                {{ producto.nombre_producto }}
-            </td>
-            <td>
-                {{ producto.fecha_compra }}
-            </td>
-            <td>
-                {{ producto.precio }}
-            </td>
-            <button (click)="eliminarCliente(cliente)">Eliminar</button>
-        </tr>
-    </table>    
-    -->
+    <div class="update">
+    </div>
 </div>

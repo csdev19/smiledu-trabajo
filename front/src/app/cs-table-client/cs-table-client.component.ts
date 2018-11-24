@@ -7,12 +7,27 @@ import { RestService } from "../rest.service";
   styleUrls: ['./cs-table-client.component.css']
 })
 export class CsTableClientComponent implements OnInit {
-
-  constructor() {
-
+  seeTable: boolean = false;
+  msj: string = 'Mostrar Tabla de cliente';
+  clientes;
+  clients_titles: Array<string> = ['Nombres','Apellidos','Direccion','Fecha de Naciminento','correo'];
+  constructor( private restService: RestService) {
+    this.restService.getMostrarClienteDB()
+      .subscribe(clientes => {
+        this.clientes = clientes;
+        console.log(this.clientes);
+      });
   }
-  
+
+
   ngOnInit() {
   }
+
+    
+  isVisible () {
+    this.seeTable = !this.seeTable;
+    this.msj = this.seeTable ? 'Ocultar Tabla de cliente' : 'Mostrar Tabla de cliente';
+  }
+
   
 }

@@ -1,0 +1,37 @@
+<button (click)="isVisible()">{{ msj }}</button>
+<div *ngIf='seeTable'>
+  <table >
+    <tr>
+      <th *ngFor='let product_title of product_titles'>
+        {{ product_title }}
+      </th>
+    </tr>
+    <tr *ngFor="let producto of productos">
+      <!-- <form action=""> -->
+        <td>
+          <!-- <input type="" name="" id="" value=""> -->
+          {{ producto.nombre_producto }}
+        </td>
+        <td>
+          <input type="hidden" name="">
+          {{ producto.precio }}
+        </td>
+        <td>
+          {{ producto.nombre_categoria }}
+        </td>
+        <td>
+          <button >Eliminar</button>
+        </td>
+      <!-- </form> -->
+        <td>
+          <button (click)="setThings(producto.id_producto)">Actualizar elemento</button>
+        </td>
+      </tr>
+    </table>
+    <button (click)="refresh()">Actualizar Lista</button>
+  <!-- <button (click)="setListSales()">ver</button> -->
+</div>
+
+<div *ngIf='formHidden'>
+    <app-cs-table-update-producto [obj]="obj"></app-cs-table-update-producto>
+</div>
