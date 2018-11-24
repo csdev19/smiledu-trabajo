@@ -20,7 +20,7 @@ function addProducts(producto) {
         let sql = `INSERT INTO public.productos(
                       nombre_producto, precio, id_categoria)
                       VALUES ($1, $2);`;
-        global.dbp.none(sql, [producto['id_cliente'], producto['precio'], producto['id_categoria'] ])
+        global.dbp.none(sql, [producto['nombre_producto'], producto['precio'], producto['id_categoria'] ])
           .then(res => {
           //   return resolve(res);
              // ahora deberiamos decir si funciono 
