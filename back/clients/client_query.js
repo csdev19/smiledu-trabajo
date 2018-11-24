@@ -12,8 +12,25 @@ function getClients() {
         });
     });
 }
+
+function getClientsTable() {
+    return new Promise((resolve, reject) => {
+        let sql = `
+        select c.nombres, 
+        c.apellidos, 
+        to_char(c.fecha_nacimiento::date,'DD/MM/YYYY'),
+        c.correo, c.direccion 
+        from clientes c;`;
+        global.dbp.any(sql)
+        .then(res => {
+            return resolve(res);
+        }).catch(err => {
+            return reject(err);
+        });
+    });
+}
  
- 
+
  
 
 function addClients(cliente) {
@@ -40,5 +57,6 @@ function addClients(cliente) {
 
 module.exports = {
     getClients,
+    getClientsTable,
     addClients
 }

@@ -1,4 +1,22 @@
 
+function getProductsTabla() {
+    return new Promise((resolve, reject) => {
+        let sql = `
+        select p.id_producto,
+            p.nombre_producto,
+            p.precio,
+            c.nombre_categoria,
+            c.id_categoria from productos p,
+                             categorias c where c.id_categoria = p.id_categoria;`;
+        global.dbp.any(sql)
+        .then(res => {
+            return resolve(res);
+        }).catch(err => {
+            return reject(err);
+        });
+    });
+}
+
 function getProducts() {
     return new Promise((resolve, reject) => {
         let sql = `SELECT *
@@ -10,8 +28,8 @@ function getProducts() {
             return reject(err);
         });
     });
-}
- 
+} 
+
 function addProducts(producto) {
     console.log('llamaste a crearproducto');
    //  console.log(producto);
@@ -34,9 +52,33 @@ function addProducts(producto) {
     });
  }
  
+ function updateProducts(producto) {
+    console.log('llamaste a crearproducto');
+   //  console.log(producto);
+
+    return new Promise((resolve , reject) => {
+        let sql = `UPDATE public.productos
+            SET nombre_producto=$1, precio=$2, id_categoria=$3
+            WHERE id_producto=$4;
+        `;
+        global.dbp.none(sql, [producto['nombre_producto'], producto['precio'], producto['id_categoria'],producto['id_prodcuto'] ])
+          .then(res => {
+          //   return resolve(res);
+             // ahora deberiamos decir si funciono 
+             console.log('funciono'+res);
+             return 'Funciono';
+          }).catch(err => {
+          //   return reject(err);
+            //  console.log(err);
+             return 'Hubo un error';
+          });
+    });
+ }
  
 
 module.exports = {
     getProducts,
-    addProducts
+    getProductsTabla,
+    addProducts,
+    updateProducts
 }

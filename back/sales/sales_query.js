@@ -26,7 +26,7 @@ function crearVenta(venta) {
         let sql = `INSERT INTO public.ventas(
                       id_producto, id_cliente, precio_venta)
                       VALUES ($1, $2, $3);`;
-        global.dbp.none(sql, [venta['id_producto'], venta['id_cliente'], venta['precio_venta'] ])
+        global.dbp.none(sql, [venta['id_producto'], venta['id_cliente'], venta['precio'] ])
           .then(res => {
           //   return resolve(res);
              // ahora deberiamos decir si funciono 

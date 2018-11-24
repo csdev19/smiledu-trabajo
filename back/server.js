@@ -24,7 +24,7 @@ app.get('/', function (req, res) {
 app.get('/ver-clientes', async function  (req, res) {
    console.log("hola estas en ver-clientes");
    await db.connectBD();
-   let resultadoDB = await client_q.getClients();
+   let resultadoDB = await client_q.getClientsTable();
    // console.log(resultadoDB);
    res.send(resultadoDB);
 })
@@ -95,6 +95,14 @@ app.get('/ver-productos', async function  (req, res) {
    res.send(resultadoDB);
 })
 
+app.get('/ver-productos-tabla', async function  (req, res) {
+    console.log("hola estas en ver-productos");
+    await db.connectBD();
+    let resultadoDB = await product_q.getProductsTabla();
+    // console.log(resultadoDB);
+    res.send(resultadoDB);
+ })
+
 app.post('/agregar-producto',async function (req, res) {
    console.log('client');
    let producto = req.body;
@@ -105,6 +113,18 @@ app.post('/agregar-producto',async function (req, res) {
    console.log("hola estas en crear-producto");
    res.send(result);
 })
+
+app.post('/actualizar-producto',async function (req, res) {
+    console.log('client');
+    let producto = req.body;
+    // console.log(producto);
+    await db.connectBD();
+    let result = await product_q.updateProducts(producto);
+    // res.send('hola estas en listar-ventaes');
+    console.log("hola estas en crear-producto");
+    res.send(result);
+ })
+ 
 
 
 app.post('/agregar-categoria',async function (req, res) {
