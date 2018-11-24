@@ -59,6 +59,29 @@ export class RestService {
       //   return res;
       // }));
   }
+
+
+  agregarProducto(nuevoCliente): Observable<any> {
+    console.log("llamaste a la api");
+    return this.http.post(`${this.url}agregar-producto`, nuevoCliente, httpOptions)
+      // .pipe(map(res => {
+      //   console.log('entre');
+      //   return res;
+      // }));
+  }
+
+
+  agregarCategoria(nuevoCliente): Observable<any> {
+    console.log("llamaste a la api");
+    return this.http.post(`${this.url}agregar-categoria`, nuevoCliente, httpOptions)
+      // .pipe(map(res => {
+      //   console.log('entre');
+      //   return res;
+      // }));
+  }
+
+
+
   eliminarCliente(id) {
     return this.http.delete(`${this.url}/api/tasks/${id}`)
       .pipe(map(res => res));

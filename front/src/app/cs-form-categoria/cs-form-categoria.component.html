@@ -1,3 +1,16 @@
-<p>
-  cs-form-categoria works!
-</p>
+<form *ngIf='seeForm' method="" (submit)='crearCategoria()'> 
+    <div>
+      <label for="">
+        Nombre Categoria: 
+        <input type="text" [(ngModel)]="nombre_categoria" name="nombre_categoria" [value]="nombre_categoria">
+      </label>
+    </div> 
+    <div>
+      <button>  
+          Crear Categoria
+      </button>
+    </div>
+  </form>
+  <button  (click)='isVisible()'>
+      {{ msj }}
+  </button>

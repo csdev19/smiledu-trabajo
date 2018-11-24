@@ -16,7 +16,8 @@ export class CsFormVentaComponent implements OnInit {
   id_clientes;
   id_productos;
 
-  categoria;
+  id_categoria;
+  nombre_categoria;
   id_cliente;
   id_producto;
   precio;
@@ -58,12 +59,20 @@ export class CsFormVentaComponent implements OnInit {
     for (let row of this.id_productos) {
       // console.log(row)
       if(row.id_producto == this.id_producto) {
-        this.categoria = row.id_categoria;
+        this.id_categoria = row.id_categoria;
         this.precio_show = row.precio;
       }
+    }
 
+    for (let row of this.categorias) {
+      if(row.id_categoria == this.id_categoria) {
+        this.nombre_categoria = row.nombre_categoria;
+      }
     }
   }
+
+
+
   isVisible () {
     this.seeForm = !this.seeForm;
     this.msj = this.seeForm ? 'Ocultar Formulario de Ventas' : 'Mostrar Formulario de Ventas';

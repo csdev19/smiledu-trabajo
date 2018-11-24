@@ -1,7 +1,7 @@
 <form *ngIf='seeForm' method="" (submit)='crearProducto()'> 
     <div>
       <label for="">
-        Precio: 
+        Nombre Producto: 
         <input type="text" [(ngModel)]="nombre_producto" name="nombre_producto" [value]="nombre_producto">
         <p>{{precio_show}}</p> 
       </label>
@@ -14,7 +14,8 @@
       </label>
     </div>  
     <div>
-      <select name="categorias"   [(ngModel)]="categoria" name="categoria">
+      Categoria: 
+      <select name="categorias"   [(ngModel)]="id_categoria" name="categoria">
         <option [value]="categoria.id_categoria"  *ngFor="let categoria of categorias">
           {{ categoria.nombre_categoria }}
         </option>
@@ -22,7 +23,7 @@
     </div>
     <div>
       <button>  
-          Crear Venta
+          Crear Producto
       </button>
     </div>
   </form>

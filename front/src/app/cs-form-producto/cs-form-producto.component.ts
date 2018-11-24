@@ -7,17 +7,19 @@ import { RestService } from '../rest.service';
   styleUrls: ['./cs-form-producto.component.css']
 })
 export class CsFormProductoComponent implements OnInit {
-  msj = 'Mostrar Formulario de Ventas';
+  msj = 'Mostrar Formulario de Productos';
   seeForm = false;
   nombre_producto;
   precio;
-  id_categorias;
+  id_categoria;
+  categorias;
+  
 
   constructor(private restService: RestService) {
     
     this.restService.getMostrarCategoriaDB()
-      .subscribe(id_categorias => {
-        this.id_categorias = id_categorias;
+      .subscribe(categorias => {
+        this.categorias = categorias;
       });
 
 
@@ -30,7 +32,7 @@ export class CsFormProductoComponent implements OnInit {
 
   isVisible () {
     this.seeForm = !this.seeForm;
-    this.msj = this.seeForm ? 'Ocultar Formulario de Ventas' : 'Mostrar Formulario de Ventas';
+    this.msj = this.seeForm ? 'Ocultar Formulario de Productos' : 'Mostrar Formulario de Productos';
   }
 
   crearVenta() {
@@ -43,13 +45,13 @@ export class CsFormProductoComponent implements OnInit {
     let producto = {
         'nombre_producto': this.nombre_producto,
         'precio': this.precio,
-        'id_categorias': this.id_categorias,
+        'id_categorias': this.id_categoria,
     };
 
 
-    // console.log(venta);
+    console.log(producto);
     
-    this.restService.crearVenta(producto).subscribe(
+    this.restService.agregarProducto(producto).subscribe(
       result => {
         // console.log(result);
         return 'work';
