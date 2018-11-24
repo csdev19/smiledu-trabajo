@@ -95,7 +95,28 @@ app.get('/ver-productos', async function  (req, res) {
    res.send(resultadoDB);
 })
 
+app.post('/agregar-producto',async function (req, res) {
+   console.log('client');
+   let producto = req.body;
+   // console.log(producto);
+   await db.connectBD();
+   let result = await product_q.addProducts(producto);
+   // res.send('hola estas en listar-ventaes');
+   console.log("hola estas en crear-producto");
+   res.send(result);
+})
 
+
+app.post('/agregar-categoria',async function (req, res) {
+   console.log('client');
+   let categoria = req.body;
+   // console.log(categoria);
+   await db.connectBD();
+   let result = await category_q.addCategories(categoria);
+   // res.send('hola estas en listar-ventaes');
+   console.log("hola estas en crear-categoria");
+   res.send(result);
+})
 
 var server = app.listen(8081, function () {
    var host = server.address().address
