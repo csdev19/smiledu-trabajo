@@ -24,7 +24,7 @@ export class RestService {
 
   
   getMostrarCategoriaDB():Observable<any> {
-    console.log(this.url+'ver-categorias')
+    // console.log(this.url+'ver-categorias')
     return this.http.get(this.url+'categories/ver-categorias').pipe(map(res => res));
   }
 

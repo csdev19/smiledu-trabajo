@@ -14,6 +14,7 @@ import { MatButtonModule,
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatFormFieldModule} from '@angular/material/form-field';
 // import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatTableModule} from '@angular/material/table';
 
 import { Clientes } from './clientes/clientes.component';
 import { CsFormClientComponent } from './cs-form-client/cs-form-client.component';
@@ -57,11 +58,13 @@ import { LayoutModule } from '@angular/cdk/layout'
     MatIconModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule
   ],
   exports: [
     MatProgressSpinnerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule
   ],
   providers: [
     // {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}}
