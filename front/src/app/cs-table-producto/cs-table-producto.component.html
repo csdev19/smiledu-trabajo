@@ -1,4 +1,4 @@
-<button (click)="isVisible()">{{ msj }}</button>
+<button mat-stroked-button color="accent" (click)="isVisible()">{{ msj }}</button>
 <div *ngIf='seeTable'>
   <table >
     <tr>
@@ -20,15 +20,15 @@
           {{ producto.nombre_categoria }}
         </td>
         <td>
-          <button >Eliminar</button>
+          <button mat-button color="warn">Eliminar</button>
         </td>
       <!-- </form> -->
         <td>
-          <button (click)="setThings(producto.id_producto)">Actualizar elemento</button>
+          <button mat-button color="primary" (click)="setThings(producto.id_producto)">Actualizar elemento</button>
         </td>
       </tr>
     </table>
-    <button (click)="refresh()">Actualizar Lista</button>
+    <button mat-raised-button color="accent" (click)="refresh()">Actualizar Lista</button>
   <!-- <button (click)="setListSales()">ver</button> -->
 </div>
 

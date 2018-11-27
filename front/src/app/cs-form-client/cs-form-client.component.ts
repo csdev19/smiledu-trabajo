@@ -1,12 +1,14 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { RestService } from "../rest.service"; 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-cs-form-client',
   templateUrl: './cs-form-client.component.html',
   styleUrls: ['./cs-form-client.component.css']
 })
-export class CsFormClientComponent implements OnInit {
+export class CsFormClientComponent implements OnInit, MatInputModule {
   categoria: string = '';
   @ViewChild('categoria_producto') categoria_producto;
   @ViewChild('edad') edad;

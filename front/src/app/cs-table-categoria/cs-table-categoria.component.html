@@ -1,4 +1,4 @@
-<button (click)="isVisible()">{{ msj }}</button>
+<button mat-stroked-button color="accent" (click)="isVisible()">{{ msj }}</button>
 <div *ngIf='seeTable'>
   <table >
     <tr>
@@ -13,6 +13,6 @@
       <!-- <button (click)="eliminarCliente(cliente)">Eliminar</button> -->
     </tr>
   </table>
-  <button (click)="refresh()">Actualizar</button>
+  <button mat-raised-button color="accent" (click)="refresh()">Actualizar</button>
   <!-- <button (click)="setListSales()">ver</button> -->
 </div>

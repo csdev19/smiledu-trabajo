@@ -1,3 +1,6 @@
+<button mat-stroked-button color="primary" (click)='isVisible()'>
+    {{ msj }}
+</button>
 <form *ngIf='seeForm' method="" (submit)='crearVenta()'> 
   <div>
       <select name="id_producto" [(ngModel)]="id_producto" name="id_producto" (change)="setValuesSale()">
@@ -29,11 +32,8 @@
     </label>
   </div>
   <div>
-    <button>  
+    <button mat-raised-button color="primary">  
         Crear Venta
     </button>
   </div>
 </form>
-<button  (click)='isVisible()'>
-    {{ msj }}
-</button>

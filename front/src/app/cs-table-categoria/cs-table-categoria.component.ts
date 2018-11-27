@@ -22,6 +22,13 @@ export class CsTableCategoriaComponent implements OnInit {
   ngOnInit() {
   }
   
+  refresh () {
+    this.restService.getMostrarCategoriaDB()
+      .subscribe(categoria => {
+        this.categorias = categoria;
+        console.log(this.categorias);
+      });
+  }
   isVisible () {
     this.seeTable = !this.seeTable;
     this.msj = this.seeTable ? 'Ocultar Tabla de Categorias' : 'Mostrar Tabla de Categorias';

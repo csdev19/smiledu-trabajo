@@ -98,7 +98,7 @@ export class CsTableUpdateProductoComponent implements OnInit, OnChanges {
 
     let venta = {
       'nombre_producto' : this.nombre_producto,
-      'nombre_categoria' : this.nombre_categoria,
+      'id_categoria' : this.id_categoria,
       'precio' : this.precio,
       'id_producto' : this.id_producto
     };

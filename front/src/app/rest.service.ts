@@ -88,15 +88,15 @@ export class RestService {
 // actualizar
 actualizarProducto(obj): Observable<any> {
   console.log("llamaste a la api");
-  return this.http.post(`${this.url}actualizar-producto`, obj, httpOptions)
+  return this.http.put(`${this.url}actualizar-producto`, obj, httpOptions)
 }
 
 
 
-  eliminarCliente(id) {
-    return this.http.delete(`${this.url}/api/tasks/${id}`)
-      .pipe(map(res => res));
-  }
+eliminarCliente(id) {
+  return this.http.delete(`${this.url}eliminar-producto/${id}`,httpOptions)
+    .pipe(map(res => res));
+}
 
   // actualizarCliente(nuevoCliente) {
   //   return this.http.put(`${this.url}/api/tasks/${nuevoCliente._id}`, nuevoCliente)

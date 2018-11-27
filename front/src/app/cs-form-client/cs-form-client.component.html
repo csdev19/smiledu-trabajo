@@ -1,9 +1,16 @@
+
+<button mat-stroked-button color="primary"  (click)='isVisible()'>
+    {{ msj }}
+</button>
+
 <form *ngIf='seeForm' method="" (submit)='agregarCliente(nombre,apellido,edad,correo,categoria_producto)'> 
   <div>
-    <label for="">
-      Nombre
-      <input type="text" #nombre >
-    </label> 
+    <mat-form-field>
+      <label for="">
+        Nombre
+        <input type="text" #nombre >
+      </label> 
+    </mat-form-field>
   </div>
   <div>
     <label for="">
@@ -24,11 +31,8 @@
     </label>
   </div>
   <div>
-    <button>  
+    <button mat-raised-button color="primary">  
         Crear Usuario
     </button>
   </div>
 </form>
-<button  (click)='isVisible()'>
-    {{ msj }}
-</button>

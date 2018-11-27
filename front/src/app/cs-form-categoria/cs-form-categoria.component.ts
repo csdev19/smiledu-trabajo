@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../rest.service';
 
+export interface CategoriaElemento {
+  categoria: string;
+}
+
+
 @Component({
   selector: 'app-cs-form-categoria',
   templateUrl: './cs-form-categoria.component.html',
