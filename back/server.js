@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const db = require('./config/db');
+const categories = require('./categories/categories');
 
 // import querys
 const client_q = require('./clients/client_query')
@@ -114,14 +115,14 @@ app.post('/agregar-producto',async function (req, res) {
    res.send(result);
 })
 
-app.post('/actualizar-producto',async function (req, res) {
+app.put('/actualizar-producto',async function (req, res) {
     console.log('client');
     let producto = req.body;
     // console.log(producto);
     await db.connectBD();
     let result = await product_q.updateProducts(producto);
     // res.send('hola estas en listar-ventaes');
-    console.log("hola estas en crear-producto");
+    console.log("hola creaste producto crear-producto");
     res.send(result);
  })
  
@@ -137,6 +138,17 @@ app.post('/agregar-categoria',async function (req, res) {
    console.log("hola estas en crear-categoria");
    res.send(result);
 })
+
+app.delete('/eliminar-categoria',async function (req, res) {
+    console.log('client');
+    let categoria = req.body;
+    // console.log(categoria);
+    await db.connectBD();
+    let result = await category_q.addCategories(categoria);
+    // res.send('hola estas en listar-ventaes');
+    console.log("hola estas en crear-categoria");
+    res.send(result);
+ })
 
 var server = app.listen(8081, function () {
    var host = server.address().address

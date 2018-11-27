@@ -13,7 +13,7 @@ function getCategories() {
  
 
 function addCategories(categoria) {
-    console.log('llamaste a crearcategoria');
+    // console.log('llamaste a crearcategoria');
    //  console.log(categoria);
 
     return new Promise((resolve , reject) => {
@@ -24,7 +24,7 @@ function addCategories(categoria) {
           .then(res => {
           //   return resolve(res);
              // ahora deberiamos decir si funciono 
-             console.log('funciono'+res);
+            //  console.log('funciono'+res);
              return 'Funciono';
           }).catch(err => {
           //   return reject(err);

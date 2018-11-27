@@ -31,7 +31,7 @@ function getProducts() {
 } 
 
 function addProducts(producto) {
-    console.log('llamaste a crearproducto');
+    // console.log('llamaste a crearproducto');
    //  console.log(producto);
 
     return new Promise((resolve , reject) => {
@@ -53,7 +53,7 @@ function addProducts(producto) {
  }
  
  function updateProducts(producto) {
-    console.log('llamaste a crearproducto');
+    // console.log('llamaste a crearproducto');
    //  console.log(producto);
 
     return new Promise((resolve , reject) => {
@@ -61,11 +61,11 @@ function addProducts(producto) {
             SET nombre_producto=$1, precio=$2, id_categoria=$3
             WHERE id_producto=$4;
         `;
-        global.dbp.none(sql, [producto['nombre_producto'], producto['precio'], producto['id_categoria'],producto['id_prodcuto'] ])
+        global.dbp.none(sql, [producto['nombre_producto'], producto['precio'], producto['id_categoria'],producto['id_producto'] ])
           .then(res => {
           //   return resolve(res);
              // ahora deberiamos decir si funciono 
-             console.log('funciono'+res);
+            //  console.log('funciono '+res);
              return 'Funciono';
           }).catch(err => {
           //   return reject(err);

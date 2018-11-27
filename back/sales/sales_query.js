@@ -19,7 +19,7 @@ where v.id_cliente=c.id_cliente and v.id_producto=p.id_producto order by v.fecha
 
 
 function crearVenta(venta) {
-    console.log('llamaste a crearVenta');
+    // console.log('llamaste a crearVenta');
    //  console.log(venta);
 
     return new Promise((resolve , reject) => {
@@ -30,7 +30,7 @@ function crearVenta(venta) {
           .then(res => {
           //   return resolve(res);
              // ahora deberiamos decir si funciono 
-             console.log('funciono'+res);
+            //  console.log('funciono'+res);
              return 'Funciono';
           }).catch(err => {
           //   return reject(err);

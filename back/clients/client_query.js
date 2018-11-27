@@ -34,7 +34,7 @@ function getClientsTable() {
  
 
 function addClients(cliente) {
-    console.log('llamaste a addclient');
+    // console.log('llamaste a addclient');
     // console.log(cliente);
     return new Promise((resolve, reject) => {
         let sql = `INSERT INTO public.clientes(
