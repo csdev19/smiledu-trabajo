@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { RestService } from '../rest.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 export interface CategoriaElemento {
-  categoria: string;
+  nombre_categoria: string;
 }
 
 
@@ -12,46 +13,61 @@ export interface CategoriaElemento {
   styleUrls: ['./cs-form-categoria.component.css']
 })
 export class CsFormCategoriaComponent implements OnInit {
-
+  categoria_nueva : CategoriaElemento;
   msj = 'Mostrar Formulario de Categorias';
-  seeForm = false;
-  nombre_categoria;
+  nombre_categoria: string;
 
-  constructor(private restService: RestService) { }
+  constructor(private restService: RestService, public dialog: MatDialog) { }
 
   ngOnInit() {
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CsFormCategoriaDialogComponent, {
+      width: '500px',
+      data: {nombre_categoria: this.nombre_categoria}
+    });
 
-  isVisible () {
-    this.seeForm = !this.seeForm;
-    this.msj = this.seeForm ? 'Ocultar Formulario de Categoria' : 'Mostrar Formulario de Categoria';
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.nombre_categoria = result;
+      this.setCategoria(result)
+    });
   }
-
-  crearCategoria() {
-    // console.log(this.id_cliente)
-    // console.log(this.id_producto)
-    // console.log(this.precio)
-
-
-
-    let categoria = {
-        'nombre_categoria': this.nombre_categoria,
+  
+  setCategoria(nombre_categoria) {
+    this.categoria_nueva = {
+      nombre_categoria : nombre_categoria
     };
-
-
-    console.log(categoria);
+  }  
+  
+  crearCategoria() {
+    console.log(this.categoria_nueva);
     
-    this.restService.agregarCategoria(categoria).subscribe(
-      result => {
+    this.restService.agregarCategoria(this.categoria_nueva)
+      .subscribe(result => {
         // console.log(result);
         return 'work';
-      }, 
-      error => {
+      },error => {
         // console.log(error);
-      }
-      )
+      })
     return false;
+  }
+}
+
+@Component({
+  selector: 'app-cs-form-categoria-dialog',
+  templateUrl: 'cs-form-categoria-dialog.component.html',
+})
+export class CsFormCategoriaDialogComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<CsFormCategoriaDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: CategoriaElemento) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 

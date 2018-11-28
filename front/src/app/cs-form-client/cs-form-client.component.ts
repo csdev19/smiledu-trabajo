@@ -2,6 +2,15 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { RestService } from "../rest.service"; 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {FormControl} from '@angular/forms';
+
+export interface ClienteElemento {
+  nombres: string,
+  apellidos: string,
+  to_char: string,
+  correo:	string,
+  direccion: string,
+}
 
 @Component({
   selector: 'app-cs-form-client',
@@ -15,16 +24,25 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
   categorias;
   msj: string = 'Mostrar formulario de cliente';
   seeForm: boolean = false;
+  cliente_nuevo: ClienteElemento;
+  date = new FormControl(new Date());
+  
+
   constructor(private restService: RestService) { 
     
-    this.restService.getMostrarCategoriaDB()
-      .subscribe(categorias => {
-        this.categorias = categorias;
-      });
+    // this.restService.getMostrarCategoriaDB()
+    //   .subscribe(categorias => {
+    //     this.categorias = categorias;
+    //   });
     
   }
   
   ngOnInit() {
+  }
+
+  escribir(){
+    console.log(this.date);
+    console.log(this.date.value);
   }
 
   isVisible () {

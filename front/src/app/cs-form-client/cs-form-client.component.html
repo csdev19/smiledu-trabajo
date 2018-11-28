@@ -1,38 +1,15 @@
+<mat-form-field>
+  <input matInput [matDatepicker]="picker1" placeholder="Angular forms" [formControl]="date">
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
 
-<button mat-stroked-button color="primary"  (click)='isVisible()'>
+
+<button (click)="escribir()" >imprimir</button>
+
+<!-- <button mat-stroked-button color="primary"  (click)='isVisible()'>
     {{ msj }}
 </button>
-
-<form *ngIf='seeForm' method="" (submit)='agregarCliente(nombre,apellido,edad,correo,categoria_producto)'> 
-  <div>
-    <mat-form-field>
-      <label for="">
-        Nombre
-        <input type="text" #nombre >
-      </label> 
-    </mat-form-field>
-  </div>
-  <div>
-    <label for="">
-      apellido
-      <input type="text" #apellido>
-    </label>
-  </div>
-  <div>
-    <label for="">
-      edad
-      <input type="text" #edad>
-    </label>
-  </div>
-  <div>
-    <label for="">
-      correo
-      <input type="email" #correo name="" id="">
-    </label>
-  </div>
-  <div>
-    <button mat-raised-button color="primary">  
-        Crear Usuario
-    </button>
-  </div>
-</form>
+<button *ngIf="cliente_nuevo" mat-raised-button color="primary">  
+    Crear Cliente
+</button> -->

@@ -1,15 +1,8 @@
-<button  mat-stroked-button color="primary" (click)='isVisible()'>
-    {{ msj }}
-  </button>
-  
-<form *ngIf='seeForm' method="" (submit)='crearCategoria()'> 
-  <div class="title">
-    <input matInput placeholder="Nombre de la categoria" type="text" [(ngModel)]="nombre_categoria" name="nombre_categoria" [value]="nombre_categoria">
-  </div> 
-  <div>
-    <button  mat-raised-button color="primary">  
-      Crear Categoria
-    </button>
-  </div>
-</form>
+<button  mat-stroked-button color="primary" (click)="openDialog()">
+  {{ msj }}
+</button>
+<button  *ngIf="categoria_nueva" mat-raised-button color="primary" (click)="crearCategoria()">  
+    Crear Categoria
+</button>
 
+<p>{{ nombre_categoria }}</p>
