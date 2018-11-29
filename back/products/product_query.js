@@ -37,7 +37,7 @@ function addProducts(producto) {
     return new Promise((resolve , reject) => {
         let sql = `INSERT INTO public.productos(
                       nombre_producto, precio, id_categoria)
-                      VALUES ($1, $2);`;
+                      VALUES ($1, $2, $3);`;
         global.dbp.none(sql, [producto['nombre_producto'], producto['precio'], producto['id_categoria'] ])
           .then(res => {
           //   return resolve(res);

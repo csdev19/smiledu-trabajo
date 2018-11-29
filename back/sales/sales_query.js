@@ -1,7 +1,9 @@
 function verVentasMejor() { 
    return new Promise((resolve, reject) => {
        let sql = `select p.nombre_producto, 
-       c.nombres, 
+	   p.id_producto,
+       c.nombres,
+       c.id_cliente,
        v.precio_venta, 
        to_char(v.fecha_compra::date,'DD/MM/YYYY') from productos p, 
                        clientes c, 

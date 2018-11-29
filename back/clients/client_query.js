@@ -40,7 +40,7 @@ function addClients(cliente) {
         let sql = `INSERT INTO public.clientes(
                       nombres, apellidos, fecha_nacimiento, correo, direccion)
                       VALUES ($1, $2, $3, $4, $5);`;
-        global.dbp.none(sql, [cliente['nombre'], cliente['apellido'], cliente['fecha_nac'], cliente['correo'], cliente['direccion']])
+        global.dbp.none(sql, [cliente['nombres'], cliente['apellidos'], cliente['to_char'], cliente['correo'], cliente['direccion']])
           .then(res => {
           //   return resolve(res);
              // ahora deberiamos decir si funciono 
