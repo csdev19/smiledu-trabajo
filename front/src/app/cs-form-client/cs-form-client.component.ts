@@ -99,6 +99,7 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
     // apellido.value = '';
     // edad.value = '';
     // correo.value = '';
+    this.cliente_nuevo = null;
     return false;
   }
   

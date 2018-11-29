@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { RestService } from "../rest.service"; 
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import {FormControl} from '@angular/forms';
 
 
 export interface VentaElemento {
   id_producto: number,
-  id_clientes: number,
+  id_cliente: number,
   fecha_compra: string,
   precio_venta: number,
 }
@@ -73,30 +74,32 @@ export class CsFormVentaComponent implements OnInit {
   }
 
   crearVenta() {
-    console.log(this.id_cliente)
-    console.log(this.id_producto)
-    console.log(this.precio)
+    // console.log(this.id_cliente)
+    // console.log(this.id_producto)
+    // console.log(this.precio)
 
 
 
-    let venta = {
-        'id_producto': this.id_producto,
-        'id_cliente': this.id_cliente,
-        'precio': this.precio
-    };
+    // let venta = {
+    //     'id_producto': this.id_producto,
+    //     'id_cliente': this.id_cliente,
+    //     'precio': this.precio
+    // };
 
 
-    console.log(venta);
+    console.log(this.venta_nueva);
     
-    // this.restService.crearVenta(venta).subscribe(
-    //   result => {
-    //     // console.log(result);
-    //     return 'work';
-    //   }, 
-    //   error => {
-    //     // console.log(error);
-    //   }
-    //   )
+    this.restService.crearVenta(this.venta_nueva).subscribe(
+      result => {
+        // console.log(result);
+        return 'work';
+      }, 
+      error => {
+        // console.log(error);
+      }
+      )
+
+    this.venta_nueva = null;
     return false;
 
     
@@ -116,25 +119,23 @@ export class CsFormVentaDialogComponent implements OnInit {
   // @ViewChild('categoria_producto') categoria_producto;
   msj: string = 'Mostrar formulario de Ventas';
   seeForm: boolean = false;
+  
+  
   categorias;
   clientes;
   productos;
 
   
-  id_categoria;
-  nombre_categoria;
-  id_cliente;
-  id_producto;
-  precio;
-  precio_show;
 
+  id_producto: number;
+  id_cliente: number;
+  precio_venta: number;
+  fecha_compra = new FormControl(new Date());
 
-  constructor(private restService: RestService) {
+  constructor(
+    private restService: RestService, public dialogRef: MatDialogRef<CsFormVentaDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: VentaElemento) {
     
-    this.restService.getMostrarCategoriaDB()
-      .subscribe(categorias => {
-        this.categorias = categorias;
-      });
 
     this.restService.getMostrarClienteDB()
     .subscribe(clientes => {
@@ -146,39 +147,18 @@ export class CsFormVentaDialogComponent implements OnInit {
       this.productos = productos;
     });
 
+
+
   }
 
   ngOnInit() {
   }
 
-  
-  obtenerCategoria(producto) {
 
+  setSale () {
+    this.data.id_producto = this.id_producto; 
+    this.data.id_cliente = this.id_cliente;
   }
-
-  setValuesSale(){
-    // console.log(this.id_productos)
-    // console.log(this.id_cliente)
-    // console.log(this.categorias)
-    console.log(this.precio)
-    // for (let row of this.id_productos) {
-    //   // console.log(row)
-    //   if(row.id_producto == this.id_producto) {
-    //     this.id_categoria = row.id_categoria;
-    //     this.precio_show = row.precio;
-    //   }
-    // }
-
-    // for (let row of this.categorias) {
-    //   if(row.id_categoria == this.id_categoria) {
-    //     this.nombre_categoria = row.nombre_categoria;
-    //   }
-    // }
-  }
-
-
-
-
 
 }
 

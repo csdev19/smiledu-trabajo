@@ -32,10 +32,24 @@ export class CsFormCategoriaComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       this.nombre_categoria = result;
-      this.setCategoria(result)
+      if (this.itsEmpty(result)){
+        // cuando esta vacio
+      } else {
+        this.setCategoria(result)
+      }
     });
   }
   
+  itsEmpty(obj){
+    let value = false;
+    for (let i of obj) {
+      if (obj[]) {
+        
+      }
+    }
+    return value;
+  }
+
   setCategoria(nombre_categoria) {
     this.categoria_nueva = {
       nombre_categoria : nombre_categoria
@@ -52,6 +66,7 @@ export class CsFormCategoriaComponent implements OnInit {
       },error => {
         // console.log(error);
       })
+    this.categoria_nueva = null;
     return false;
   }
 }

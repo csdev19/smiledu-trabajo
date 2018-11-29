@@ -3,8 +3,8 @@
       <mat-select placeholder="Cliente" [(value)]="id_cliente" >
           <!-- formControlName="" -->
         <mat-option *ngFor="let cliente of clientes"
-        [value]="categoria.id_categoria">
-          {{ cliente.nombre_cliente }}
+        [value]="cliente.id_cliente">
+          {{ cliente.nombres }}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -12,64 +12,26 @@
       <mat-select placeholder="Productos" [(value)]="id_producto" >
             <!-- formControlName="" -->
         <mat-option *ngFor="let producto of productos"
-        [value]="categoria.id_categoria">
-          {{ productos.nombre_producto }}
+        [value]="producto.id_producto">
+          {{ producto.nombre_producto }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-    <p>{{ categoria_test }}</p>
-    <p>{{ data.id_producto}}</p>
+    <mat-form-field>
+      <input  placeholder="Precio Producto " type="text" matInput  
+      [(ngModel)]="data.precio_venta"  name="nombre_producto" >
+    </mat-form-field>
+<!-- 
     <p>{{ data.nombre_producto}}</p>
     <p>{{ data.precio}}</p>
-    <p>{{ data.id_categoria}}</p>
-  
+   -->
     <div>
       <button mat-raised-button color="primary" mat-button 
-      [mat-dialog-close]="data" cdkFocusInitial (click)="setProduct()">Ok</button>
+      [mat-dialog-close]="data" cdkFocusInitial (click)="setSale()">Ok</button>
     </div>
   </div>
 
 
 <button mat-stroked-button color="primary" (click)='isVisible()'>
 
-  
-        {{ msj }}
-    </button>
-    <form *ngIf='seeForm' method="" (submit)='crearVenta()'> 
-      <div>
-          <select name="id_producto" [(ngModel)]="id_producto" name="id_producto" (change)="setValuesSale()">
-          <option [value]="id_producto.id_producto"  *ngFor="let id_producto of id_productos">
-            {{ id_producto.nombre_producto }} 
-          </option>
-        </select>
-      </div>
-      <div>
-        <select name="id_cliente"  [(ngModel)]="id_cliente" name="id_cliente">
-          <option [value]="id_cliente.id_cliente"  *ngFor="let id_cliente of id_clientes">
-            {{ id_cliente.nombres }} {{ id_cliente.apellidos }}
-          </option>
-        </select>
-      </div>
-      <div>
-        <p> {{ nombre_categoria }}</p>
-          <!-- <select name="categorias"   [(ngModel)]="categoria" name="categoria">
-          <option [value]="categoria.id_categoria"  *ngFor="let categoria of categorias">
-            {{ categoria.nombre_categoria }}
-          </option>
-        </select> -->
-      </div>
-      <div>
-        <label for="">
-          Precio: 
-          <input type="text" [(ngModel)]="precio" name="precio" [value]="precio">
-          <p>{{precio_show}}</p> 
-        </label>
-      </div>
-      <div>
-        <button mat-raised-button color="primary">  
-            Crear Venta
-        </button>
-      </div>
-    </form>
-    
+ 

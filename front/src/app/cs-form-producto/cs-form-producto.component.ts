@@ -59,6 +59,7 @@ export class CsFormProductoComponent implements OnInit {
       console.log(result);
       // this.nombre_categoria = result;
       this.producto_nuevo = result;
+      
     });
   }
 
@@ -77,6 +78,8 @@ export class CsFormProductoComponent implements OnInit {
         // console.log(error);
       }
       )
+    this.producto_nuevo = null;
+
     return false;
   }
 
