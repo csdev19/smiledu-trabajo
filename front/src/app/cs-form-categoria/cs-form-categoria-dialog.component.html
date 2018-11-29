@@ -3,7 +3,6 @@
     <input  placeholder="Nombre de la categoria" type="text" matInput  
     [(ngModel)]="data.nombre_categoria"  name="nombre_categoria" [value]="nombre_categoria">
   </mat-form-field>
-  <p>{{ data.nombre_categoria}}</p>
   <div>
     <button mat-raised-button color="primary" mat-button [mat-dialog-close]="data.nombre_categoria" cdkFocusInitial>Ok</button>
   </div>

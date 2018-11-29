@@ -1,11 +1,19 @@
-<mat-form-field>
+<button  mat-stroked-button color="primary" (click)="openDialog()">
+    {{ msj }}
+</button>
+<button  *ngIf="cliente_nuevo" mat-raised-button color="primary" (click)="crearCliente()">  
+    Crear Cliente
+</button>
+        
+  <p>{{ nombre_categoria }}</p>
+<!-- <mat-form-field>
   <input matInput [matDatepicker]="picker1" placeholder="Angular forms" [formControl]="date">
   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
   <mat-datepicker #picker1></mat-datepicker>
 </mat-form-field>
-
-
 <button (click)="escribir()" >imprimir</button>
+ -->
+
 
 <!-- <button mat-stroked-button color="primary"  (click)='isVisible()'>
     {{ msj }}

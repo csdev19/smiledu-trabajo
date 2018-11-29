@@ -16,6 +16,7 @@ export class RestService {
 
   }
 
+//    MOSTRAR 
 
   getMostrarClienteDB():Observable<any> {
     console.log(this.url+'ver-clientes')
@@ -42,16 +43,11 @@ export class RestService {
     return this.http.get(this.url+'sales/ver-ventas').pipe (map(res => res));
   }
 
-  // AGREGAR
-
-  // agregarCliente(nuevoCliente) {
-  //   return this.http.post(`${this.url}/agregar-cliente`, nuevoCliente)
-  //     .pipe(map(res => res));
-  // }
+//            AGREGAR
 
   agregarCliente(nuevoCliente): Observable<any> {
     console.log("llamaste a la api");
-    return this.http.post(`${this.url}clientes/agregar-cliente`, nuevoCliente, httpOptions)
+    return this.http.post(`${this.url}clientes/agregar-clientes`, nuevoCliente, httpOptions)
       // .pipe(map(res => {
       //   console.log('entre');
       //   return res;
@@ -77,9 +73,14 @@ export class RestService {
       //   return res;
       // }));
   }
+  
+  crearVenta(nuevaVenta): Observable<any> {
+    console.log("llamaste a la api venta");
+    return this.http.post(`${this.url}sales/crear-venta`, nuevaVenta, httpOptions)
+  }
 
 
-// actualizar
+//              ACTUALIZAR
 actualizarProducto(obj): Observable<any> {
   console.log("llamaste a la api");
   return this.http.put(`${this.url}products/actualizar-producto`, obj, httpOptions)
@@ -87,6 +88,8 @@ actualizarProducto(obj): Observable<any> {
 
 
 
+
+//            ELIMINAR
 eliminarCliente(id) {
   return this.http.delete(`${this.url}products/eliminar-producto/${id}`,httpOptions)
     .pipe(map(res => res));
@@ -96,11 +99,6 @@ eliminarCliente(id) {
   //   return this.http.put(`${this.url}/api/tasks/${nuevoCliente._id}`, nuevoCliente)
   //     .pipe(map(res => res));
   // }
-  
-  crearVenta(venta): Observable<any> {
-    console.log("llamaste a la api venta");
-    return this.http.post(`${this.url}sales/crear-venta`, venta, httpOptions)
-  }
 
   
 

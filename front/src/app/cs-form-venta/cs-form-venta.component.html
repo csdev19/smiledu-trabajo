@@ -1,39 +1,6 @@
-<button mat-stroked-button color="primary" (click)='isVisible()'>
+<button mat-stroked-button color="primary" (click)='openDialog()'>
     {{ msj }}
 </button>
-<form *ngIf='seeForm' method="" (submit)='crearVenta()'> 
-  <div>
-      <select name="id_producto" [(ngModel)]="id_producto" name="id_producto" (change)="setValuesSale()">
-      <option [value]="id_producto.id_producto"  *ngFor="let id_producto of id_productos">
-        {{ id_producto.nombre_producto }} 
-      </option>
-    </select>
-  </div>
-  <div>
-    <select name="id_cliente"  [(ngModel)]="id_cliente" name="id_cliente">
-      <option [value]="id_cliente.id_cliente"  *ngFor="let id_cliente of id_clientes">
-        {{ id_cliente.nombres }} {{ id_cliente.apellidos }}
-      </option>
-    </select>
-  </div>
-  <div>
-    <p> {{ nombre_categoria }}</p>
-      <!-- <select name="categorias"   [(ngModel)]="categoria" name="categoria">
-      <option [value]="categoria.id_categoria"  *ngFor="let categoria of categorias">
-        {{ categoria.nombre_categoria }}
-      </option>
-    </select> -->
-  </div>
-  <div>
-    <label for="">
-      Precio: 
-      <input type="text" [(ngModel)]="precio" name="precio" [value]="precio">
-      <p>{{precio_show}}</p> 
-    </label>
-  </div>
-  <div>
-    <button mat-raised-button color="primary">  
-        Crear Venta
-    </button>
-  </div>
-</form>
+<button  *ngIf="venta_nueva" mat-raised-button color="primary" (click)="crearVenta()">  
+    Crear Venta
+</button>

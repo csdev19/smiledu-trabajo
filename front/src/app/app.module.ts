@@ -16,17 +16,20 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 // import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule} from '@angular/material/table';
 import { MatDialogModule} from '@angular/material/dialog';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 import { Clientes } from './clientes/clientes.component';
-import { CsFormClientComponent } from './cs-form-client/cs-form-client.component';
+import { CsFormClientComponent,CsFormClientDialogComponent } from './cs-form-client/cs-form-client.component';
 import { CsTableClientComponent } from './cs-table-client/cs-table-client.component';
-import { CsFormVentaComponent } from './cs-form-venta/cs-form-venta.component';
+import { CsFormVentaComponent, CsFormVentaDialogComponent } from './cs-form-venta/cs-form-venta.component';
 import { CsTableVentasComponent } from './cs-table-ventas/cs-table-ventas.component';
-import { CsFormCategoriaComponent, CsFormCategoriaDialogComponent } from './cs-form-categoria/cs-form-categoria.component';
-import { CsFormProductoComponent } from './cs-form-producto/cs-form-producto.component';
+import { CsFormCategoriaComponent, 
+        CsFormCategoriaDialogComponent } from './cs-form-categoria/cs-form-categoria.component';
+import { CsFormProductoComponent, 
+        CsFormProductoDialogComponent } from './cs-form-producto/cs-form-producto.component';
 import { CsTableCategoriaComponent } from './cs-table-categoria/cs-table-categoria.component';
 import { CsTableProductoComponent } from './cs-table-producto/cs-table-producto.component';
 import { CsTableUpdateProductoComponent } from './cs-table-update-producto/cs-table-update-producto.component';
@@ -38,16 +41,19 @@ import { LayoutModule } from '@angular/cdk/layout'
     AppComponent,
     Clientes,
     CsFormClientComponent,
+    CsFormClientDialogComponent,
     CsTableClientComponent,
     CsFormVentaComponent,
+    CsFormVentaDialogComponent,
     CsTableVentasComponent,
     CsFormCategoriaComponent,
     CsFormCategoriaDialogComponent,
     CsFormProductoComponent,
+    CsFormProductoDialogComponent,
     CsTableCategoriaComponent,
     CsTableProductoComponent,
     CsTableUpdateProductoComponent,
-    ExampleNavbarComponent
+    ExampleNavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +75,7 @@ import { LayoutModule } from '@angular/cdk/layout'
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule, 
+    MatSelectModule
     // MatMomentDateModule
   ],
   exports: [
@@ -80,13 +87,17 @@ import { LayoutModule } from '@angular/cdk/layout'
     // MatNativeDateModule, 
     // MatMomentDateModule,
     MatDatepickerModule, 
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [
     // {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}}
   ],
   entryComponents: [
-    CsFormCategoriaComponent, CsFormCategoriaDialogComponent
+    CsFormCategoriaComponent, CsFormCategoriaDialogComponent,
+    CsFormClientComponent, CsFormClientDialogComponent,
+    CsFormProductoComponent, CsFormProductoDialogComponent,
+    CsFormVentaDialogComponent, CsFormVentaComponent
   ],
   bootstrap: [AppComponent]
 })

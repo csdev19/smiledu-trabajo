@@ -1,32 +1,6 @@
-<button mat-stroked-button color="primary" (click)='isVisible()'>
+<button mat-stroked-button color="primary" (click)='openDialog()'>
     {{ msj }}
 </button>
-<form *ngIf='seeForm' method="" (submit)='crearProducto()'> 
-    <div>
-      <label for="">
-        Nombre Producto: 
-        <input type="text" [(ngModel)]="nombre_producto" name="nombre_producto" [value]="nombre_producto">
-        <p>{{precio_show}}</p> 
-      </label>
-    </div>  
-    <div>
-      <label for="">
-        Precio: 
-        <input type="text" [(ngModel)]="precio" name="precio" [value]="precio">
-        <p>{{precio_show}}</p> 
-      </label>
-    </div>  
-    <div>
-      Categoria: 
-      <select name="categorias"   [(ngModel)]="id_categoria" name="categoria">
-        <option [value]="categoria.id_categoria"  *ngFor="let categoria of categorias">
-          {{ categoria.nombre_categoria }}
-        </option>
-      </select>
-    </div>
-    <div>
-      <button mat-raised-button color="primary">  
-          Crear Producto
-      </button>
-    </div>
-  </form>
+<button  *ngIf="producto_nuevo" mat-raised-button color="primary" (click)="crearProducto()">  
+    Crear Producto
+</button>

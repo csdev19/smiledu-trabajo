@@ -1,0 +1,25 @@
+<div mat-dialog-content class="dialog-cliente">
+  <mat-form-field>
+    <input  placeholder="Nombre Producto " type="text" matInput  
+    [(ngModel)]="data.nombre_producto"  name="nombre_producto" >
+  </mat-form-field>
+  <mat-form-field>
+    <input  placeholder="Precio" type="text" matInput  
+    [(ngModel)]="data.precio"  name="precio" >
+  </mat-form-field>
+  <mat-form-field >
+    <mat-select placeholder="Categoria" [(value)]="categoria_id" >
+        <!-- formControlName="" -->
+      <mat-option *ngFor="let categoria of categorias"
+      [value]="categoria.id_categoria">
+        {{ categoria.nombre_categoria }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+
+  <div>
+    <button mat-raised-button color="primary" mat-button 
+    [mat-dialog-close]="data" cdkFocusInitial (click)="setProduct()">Ok</button>
+  </div>
+</div>
