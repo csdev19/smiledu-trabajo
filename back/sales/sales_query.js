@@ -19,6 +19,16 @@ where v.id_cliente=c.id_cliente and v.id_producto=p.id_producto order by v.fecha
    });
 }
 
+// Este antogio query
+// select p.nombre_producto, 
+// 	   p.id_producto,
+//        c.nombres,
+//        c.id_cliente,
+//        v.precio_venta, 
+//        to_char(v.fecha_compra::date,'DD/MM/YYYY') from productos p, 
+//                        clientes c, 
+//                        ventas v
+// where v.id_cliente=c.id_cliente and v.id_producto=p.id_producto order by v.fecha_compra desc;
 
 function crearVenta(venta) {
     // console.log('llamaste a crearVenta');
