@@ -11,13 +11,13 @@ router.get('/ver-categorias', async function  (req, res) {
     res.send(resultadoDB);
 })
 router.post('/agregar-categoria',async function (req, res) {
-    console.log('client');
+    // console.log('client');
     let categoria = req.body;
     // console.log(categoria);
     await db.connectBD();
     let result = await category_q.addCategories(categoria);
     // res.send('hola estas en listar-ventaes');
-    console.log("hola estas en crear-categoria");
+    // console.log("hola estas en crear-categoria");
     res.send(result);
 })
  

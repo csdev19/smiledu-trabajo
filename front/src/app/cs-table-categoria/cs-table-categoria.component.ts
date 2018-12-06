@@ -12,22 +12,22 @@ export class CsTableCategoriaComponent implements OnInit {
   categorias = INFO;
   categories_titles: Array<string> = ['id_categoria','nombre_categoria']
   constructor( private restService: RestService) {
-    // this.restService.getMostrarCategoriaDB()
-    //   .subscribe(categoria => {
-    //     this.categorias = categoria;
-    //     console.log(this.categorias);
-    //   });
+    this.restService.getMostrarCategoriaDB()
+      .subscribe(categoria => {
+        this.categorias = categoria;
+        // console.log(this.categorias);
+      });
   }
 
   ngOnInit() {
   }
   
   refresh () {
-    // this.restService.getMostrarCategoriaDB()
-    //   .subscribe(categoria => {
-    //     this.categorias = categoria;
-    //     console.log(this.categorias);
-    //   });
+    this.restService.getMostrarCategoriaDB()
+      .subscribe(categoria => {
+        this.categorias = categoria;
+        // console.log(this.categorias);
+      });
   }
   isVisible () {
     this.seeTable = !this.seeTable;

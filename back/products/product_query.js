@@ -42,7 +42,7 @@ function addProducts(producto) {
           .then(res => {
           //   return resolve(res);
              // ahora deberiamos decir si funciono 
-             console.log('funciono'+res);
+            //  console.log('funciono'+res);
              return 'Funciono';
           }).catch(err => {
           //   return reject(err);

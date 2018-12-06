@@ -1,0 +1,23 @@
+button(mat-stroked-button, color='accent', (click)='isVisible()') {{ msj }}
+.table-client(*ngIf='seeTable')
+  table(mat-table, [dataSource]='clientes')
+    ng-container(matColumnDef='nombre')
+      th(mat-header-cell, *matHeaderCellDef)  Nombre 
+      td(mat-cell, *matCellDef='let cliente')  {{ cliente.nombres }} 
+    ng-container(matColumnDef='apellido')
+      th(mat-header-cell, *matHeaderCellDef)  Apellido 
+      td(mat-cell, *matCellDef='let cliente')  {{ cliente.apellidos }} 
+    ng-container(matColumnDef='to_char')
+      th(mat-header-cell, *matHeaderCellDef)  Fecha 
+      td(mat-cell, *matCellDef='let cliente')  {{ cliente.to_char }} 
+    ng-container(matColumnDef='correo')
+      th(mat-header-cell, *matHeaderCellDef)  Correo 
+      td(mat-cell, *matCellDef='let cliente')  {{ cliente.correo }} 
+    ng-container(matColumnDef='direccion')
+      th(mat-header-cell, *matHeaderCellDef)  Direccion 
+      td(mat-cell, *matCellDef='let cliente')  {{ cliente.direccion }} 
+    //- tbody
+    tr(mat-header-row, *matHeaderRowDef='atributosCliente; sticky: true')
+    tr(mat-row, *matRowDef='let row; columns: atributosCliente;')
+  button(mat-raised-button, color='accent', (click)='refresh()') Actualizar
+//- // <button (click)="setListSales()">ver</button>

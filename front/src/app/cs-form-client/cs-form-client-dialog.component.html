@@ -1,35 +1,25 @@
-<div mat-dialog-content class="dialog-cliente">
+
+<div class="dialog-cliente" [formGroup]="clienteForm">
   <mat-form-field>
-    <input  placeholder="Nombres " type="text" matInput  
-    [(ngModel)]="data.nombres"  name="nombres" [value]="nombres">
+    <input placeholder="Nombres" type="text" matInput formControlName="nombres" name="nombres">
   </mat-form-field>
   <mat-form-field>
-    <input  placeholder="Apellidos" type="text" matInput  
-    [(ngModel)]="data.apellidos"  name="apellidos" [value]="apellidos">
+    <input placeholder="Apellidos" type="text" matInput formControlName="apellidos" name="apellidos">
   </mat-form-field>
   <mat-form-field>
-    <input matInput [matDatepicker]="picker1" placeholder="Fecha" [formControl]="date">
+    <input matInput placeholder="Fecha" [matDatepicker]="picker1" formControlName="date">
     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
   </mat-form-field>
-  <!-- <button (click)="escribir()" >imprimir</button> -->
-  <!-- <mat-form-field>
-    <input  placeholder="Fecha " type="text" matInput  
-    [(ngModel)]="data.to_char"  name="fecha" [value]="fecha">
-  </mat-form-field> -->
   <mat-form-field>
-    <input  placeholder="Correo " type="text" matInput  
-    [(ngModel)]="data.correo"  name="correo" [value]="correo">
+    <input placeholder="Correo " type="text" matInput formControlName="correo" name="correo">
   </mat-form-field>
   <mat-form-field>
-    <input  placeholder="Direccion " type="text" matInput  
-    [(ngModel)]="data.direccion"  name="direccion" [value]="direccion">
+    <input placeholder="Direccion " type="text" matInput formControlName="direccion" name="direccion">
   </mat-form-field>
-
-
   <div>
-    <button mat-raised-button color="primary" mat-button 
-    [mat-dialog-close]="data" cdkFocusInitial (click)="setClient()" 
-    >Ok</button>
+    <button type="!clienteForm.valid" mat-raised-button color="primary" mat-button (click)="setClient()" [mat-dialog-close]="data">Ok</button>
   </div>
+  <p>Form Status: {{ clienteForm.status }}</p>
+  <p>Form Status: {{ clienteForm.valid }}</p>
 </div>

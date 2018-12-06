@@ -19,7 +19,7 @@ export class RestService {
 //    MOSTRAR 
 
   getMostrarClienteDB():Observable<any> {
-    console.log(this.url+'ver-clientes')
+    // console.log(this.url+'ver-clientes')
     return this.http.get(this.url+'clientes/ver-clientes').pipe(map(res => res));
   }
 
@@ -30,59 +30,44 @@ export class RestService {
   }
 
   getMostrarProductoDB():Observable<any> {
-    console.log(this.url+'products/ver-productos')
+    // console.log(this.url+'products/ver-productos')
     return this.http.get(this.url+'products/ver-productos').pipe(map(res => res));
   }
  
   getMostrarProductoTablaDB():Observable<any> {
-    console.log(this.url+'ver-productos-tabla')
+    // console.log(this.url+'ver-productos-tabla')
     return this.http.get(this.url+'products/ver-productos-tabla').pipe(map(res => res));
   }
   getMostrarVentasDB():Observable<any> {
-    console.log(this.url+'ver-ventas')
+    // console.log(this.url+'ver-ventas')
     return this.http.get(this.url+'sales/ver-ventas').pipe (map(res => res));
   }
 
 //            AGREGAR
 
   agregarCliente(nuevoCliente): Observable<any> {
-    console.log("llamaste a la api");
     return this.http.post(`${this.url}clientes/agregar-clientes`, nuevoCliente, httpOptions)
-      // .pipe(map(res => {
-      //   console.log('entre');
-      //   return res;
-      // }));
   }
 
 
   agregarProducto(nuevoCliente): Observable<any> {
-    console.log("llamaste a la api");
     return this.http.post(`${this.url}products/agregar-producto`, nuevoCliente, httpOptions)
-      // .pipe(map(res => {
-      //   console.log('entre');
-      //   return res;
-      // }));
   }
 
 
   agregarCategoria(nuevoCliente): Observable<any> {
-    console.log("llamaste a la api");
     return this.http.post(`${this.url}categories/agregar-categoria`, nuevoCliente, httpOptions)
-      // .pipe(map(res => {
-      //   console.log('entre');
-      //   return res;
-      // }));
   }
   
   crearVenta(nuevaVenta): Observable<any> {
-    console.log("llamaste a la api venta");
+    // console.log("llamaste a la api venta");
     return this.http.post(`${this.url}sales/crear-venta`, nuevaVenta, httpOptions)
   }
 
 
 //              ACTUALIZAR
 actualizarProducto(obj): Observable<any> {
-  console.log("llamaste a la api");
+  // console.log("llamaste a la api");
   return this.http.put(`${this.url}products/actualizar-producto`, obj, httpOptions)
 }
 
@@ -113,13 +98,3 @@ const httpOptions = {
     'Content-Type':  'application/json'
   })
 };
-
-
-  // getMostrarCliente() {
-  //   console.log(this.url+'mostrar-cliente')
-  //   this.http.get(this.url+'mostrar-cliente').subscribe(row=> {
-  //     console.log(row);
-  //   },err => {
-  //     console.log(err);
-  //   })
-  // }

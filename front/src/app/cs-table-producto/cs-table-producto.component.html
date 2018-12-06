@@ -1,55 +1,28 @@
+
 <button mat-stroked-button color="accent" (click)="isVisible()">{{ msj }}</button>
-<div *ngIf='seeTable'>
+<div *ngIf="seeTable">
   <table mat-table [dataSource]="productos">
     <ng-container matColumnDef="id_producto">
-        <th mat-header-cell *matHeaderCellDef> id </th>
-        <td mat-cell *matCellDef="let producto"> {{ producto.id_producto }} </td>
-      </ng-container> 
-      <ng-container matColumnDef="nombre_producto">
-        <th mat-header-cell *matHeaderCellDef> Nombre Cliente </th>
-        <td mat-cell *matCellDef="let producto"> {{ producto.nombre_producto }} </td>
-      </ng-container> 
-      <ng-container matColumnDef="precio">
-        <th mat-header-cell *matHeaderCellDef> Fecha </th>
-        <td mat-cell *matCellDef="let producto"> {{ producto.precio }} </td>
-      </ng-container> 
-      <ng-container matColumnDef="categoria">
-        <th mat-header-cell *matHeaderCellDef> Precio producto </th>
-        <td mat-cell *matCellDef="let producto"> {{ producto.nombre_categoria }} </td>
-      </ng-container> 
+      <th mat-header-cell *matHeaderCellDef> id </th>
+      <td mat-cell *matCellDef="let producto"> {{ producto.id_producto }} </td>
+    </ng-container>
+    <ng-container matColumnDef="nombre_producto">
+      <th mat-header-cell *matHeaderCellDef> Nombre Producto </th>
+      <td mat-cell *matCellDef="let producto"> {{ producto.nombre_producto }} </td>
+    </ng-container>
+    <ng-container matColumnDef="precio">
+      <td mat-cell *matCellDef="let producto"> {{ producto.precio }} </td>
+      <th mat-header-cell *matHeaderCellDef> Precio producto </th>
+    </ng-container>
+    <ng-container matColumnDef="nombre_categoria">
+      <td mat-cell *matCellDef="let producto"> {{ producto.nombre_categoria }} </td>
+      <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="atributosProducto ; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: atributosProducto ;"></tr>  
+    <tr mat-row *matRowDef="let row; columns: atributosProducto ;"></tr>
   </table>
-    <!-- <tr>
-      <th *ngFor='let product_title of product_titles'>
-        {{ product_title }}
-      </th>
-    </tr>
-    <tr *ngFor="let producto of productos">
-      <!-- <form action="">
-        <td>
-          <!-- <input type="" name="" id="" value="">
-          {{ producto.nombre_producto }}
-        </td>
-        <td>
-          <input type="hidden" name="">
-          {{ producto.precio }}
-        </td>
-        <td>
-          {{ producto.nombre_categoria }}
-        </td>
-        <td>
-          <button mat-button color="warn">Eliminar</button>
-        </td> -->
-      <!-- </form> -->
-        <!-- <td>
-          <button mat-button color="primary" (click)="setThings(producto.id_producto)">Actualizar elemento</button>
-        </td> -->
-      <!-- </tr> -->
-    <button mat-raised-button color="accent" (click)="refresh()">Actualizar Lista</button>
-  <!-- <button (click)="setListSales()">ver</button> -->
-</div>  
-
-<div *ngIf='formHidden'>
-    <app-cs-table-update-producto [obj]="obj"></app-cs-table-update-producto>
-</div>  
+  <button mat-raised-button color="accent" (click)="refresh()">Actualizar Lista</button>
+</div>
+<div *ngIf="formHidden">
+  <app-cs-table-update-producto [obj]="obj"></app-cs-table-update-producto>
+</div>

@@ -1,0 +1,17 @@
+.dialog-cliente([formGroup]='clienteForm')
+  mat-form-field
+    input(placeholder='Nombres', type='text', matInput, formControlName ='nombres', name='nombres')
+  mat-form-field
+    input(placeholder='Apellidos', type='text', matInput, formControlName ='apellidos', name='apellidos')
+  mat-form-field
+    input(matInput, placeholder='Fecha', [matDatepicker]='picker1', formControlName ='date')
+    mat-datepicker-toggle(matSuffix, [for]='picker1')
+    mat-datepicker(#picker1)
+  mat-form-field
+    input(placeholder='Correo ', type='text', matInput, formControlName ='correo', name='correo')
+  mat-form-field
+    input(placeholder='Direccion ', type='text', matInput, formControlName ='direccion', name='direccion')
+  div
+    button(type='submit' [disabled]='!clienteForm.valid' mat-raised-button, color='primary', mat-button, (click)='setClient()', [mat-dialog-close]='data') Ok
+  p Form Status: {{ clienteForm.status }}
+  p Form Status: {{ clienteForm.valid }}

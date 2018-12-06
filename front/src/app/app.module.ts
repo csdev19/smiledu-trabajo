@@ -12,6 +12,8 @@ import { MatButtonModule,
           MatIconModule,MatListModule
 } from "@angular/material";
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 // import {MatFormFieldModule} from '@angular/material/form-field';
 // import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule} from '@angular/material/table';
@@ -33,7 +35,6 @@ import { CsFormProductoComponent,
 import { CsTableCategoriaComponent } from './cs-table-categoria/cs-table-categoria.component';
 import { CsTableProductoComponent } from './cs-table-producto/cs-table-producto.component';
 import { CsTableUpdateProductoComponent } from './cs-table-update-producto/cs-table-update-producto.component';
-import { ExampleNavbarComponent } from './example-navbar/example-navbar.component';
 import { LayoutModule } from '@angular/cdk/layout'
 
 @NgModule({
@@ -53,7 +54,6 @@ import { LayoutModule } from '@angular/cdk/layout'
     CsTableCategoriaComponent,
     CsTableProductoComponent,
     CsTableUpdateProductoComponent,
-    ExampleNavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +88,8 @@ import { LayoutModule } from '@angular/cdk/layout'
     // MatMomentDateModule,
     MatDatepickerModule, 
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
   providers: [
     // {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}}

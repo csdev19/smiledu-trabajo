@@ -35,8 +35,6 @@ function getClientsTable() {
  
 
 function addClients(cliente) {
-    // console.log('llamaste a addclient');
-    // console.log(cliente);
     return new Promise((resolve, reject) => {
         let sql = `INSERT INTO public.clientes(
                       nombres, apellidos, fecha_nacimiento, correo, direccion)
@@ -46,11 +44,11 @@ function addClients(cliente) {
           //   return resolve(res);
              // ahora deberiamos decir si funciono 
             //  console.log('funciono'+res);
-             return 'Funciono';
+             return true;
           }).catch(err => {
           //   return reject(err);
             //  console.log(err);
-             return 'Hubo un error';
+             return false;
           });
     });
  }

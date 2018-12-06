@@ -1,0 +1,5 @@
+button(mat-stroked-button, color='primary', (click)='openDialog()')
+  | {{ msj }}
+button(*ngIf='categoria_nueva', mat-raised-button, color='primary', (click)='crearCategoria()')
+  | Crear Categoria
+p {{ nombre_categoria }}
