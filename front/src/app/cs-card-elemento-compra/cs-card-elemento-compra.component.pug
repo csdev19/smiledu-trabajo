@@ -1,0 +1,14 @@
+.main-card-container
+  mat-card(class="example-card")
+    mat-card-header
+      div(mat-card-avatar class="example-header-image")
+      mat-card-title Compra 1
+      mat-card-subtitle Compra 2 dasd asd s
+    img.imagen(mat-card-image [src]="imagen" alt="Photo of a Shiba Inu")
+    mat-card-content
+      p
+      |  Este elemeto {{ card-content }}
+    mat-card-actions
+      button(mat-button)  AGREGAR
+      button(mat-button, (click)='ver()')  VER
+//- <button mat-button>SHARE</button>

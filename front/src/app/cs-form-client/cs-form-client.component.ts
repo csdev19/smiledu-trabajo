@@ -159,18 +159,6 @@ export class CsFormClientDialogComponent {
   }
 
   getErrorNombre() {
-    // console.log(atrib)
-    // return this.clienteForm.value.nombres.hasError('required') ? 'Debes de ingresar un valor' :
-    // this.email.hasError('email') ? 'Not a valid email'  :
-    //     '';   
     return 'Debes ingresar un nombre ';
   }
-  
-  // getErrorApellido() {
-  //   // console.log(atrib)
-  //   // return this.clienteForm.value.nombres.hasError('required') ? 'Debes de ingresar un valor' :
-  //   // this.email.hasError('email') ? 'Not a valid email'  :
-  //   //     '';   
-  //   return 'Debes ingresar un apellido ';
-  // }
 }
