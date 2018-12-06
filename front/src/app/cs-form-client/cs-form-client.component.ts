@@ -41,7 +41,6 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
   direccion;
   
   constructor(
-    private restService: RestService, 
     public dialog: MatDialog, 
     public snackBar: MatSnackBar
   ) {}
@@ -51,38 +50,24 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CsFormClientDialogComponent, {
-      width: '800px',
+      width: '400px',
       data: {
-        nombres: this.nombres,
-        apellidos: this.apellidos,
-        to_char: this.to_char,
-        correo:	this.correo,
-        direccion: this.direccion,
+        exito: false
       }
     });
 
-    dialogRef.disableClose = true;
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      this.setCliente(result)
+      if (result.exito) {
+        this.openSnackBar('Cliente', 'Fue ingresado exitosamente');
+      } else {
+        this.openSnackBar('Cliente', 'No fue creado exitosamente');
+      }
     });
   }
 
-
-
-  setCliente(result: any): any {
-    this.cliente_nuevo = {
-      nombres: result.nombres,
-      apellidos: result.apellidos,
-      to_char: result.to_char,
-      correo:	result.correo,
-      direccion: result.direccion
-    }
-
-    console.log(this.cliente_nuevo);
-  }
 
 
   openSnackBar(message: string, action: string) {
@@ -91,12 +76,61 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
     });
   }
 
+}
+
+
+
+@Component({
+  selector: 'app-cs-form-client-dialog',
+  templateUrl: './cs-form-client-dialog.component.html',
+  styleUrls: ['./cs-form-client-dialog.component.css']
+})
+export class CsFormClientDialogComponent {
+  // nombres = new FormControl('');
+  // correo = new FormControl('');
+  // apellidos = new FormControl('');
+  // direccion = new FormControl('');
+
+  clienteForm = this.fb.group ({
+    'nombres': ['', Validators.required],
+    'apellidos': ['', Validators.required],
+    'correo': ['', Validators.email],
+    'direccion': ['', Validators.required],
+    'to_char': [new Date(), Validators.required]
+    // date: [new Date()]
+  })
+
+  constructor(
+    private restService: RestService, 
+    public dialogRef: MatDialogRef<CsFormClientDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ClienteElemento,
+    private fb: FormBuilder
+    ) {}
+
+    get nombres() { return this.clienteForm.get('nombres'); }
+    get apellidos() { return this.clienteForm.get('apellidos'); }
+    get correo() { return this.clienteForm.get('correo'); }
+    get direccion() { return this.clienteForm.get('direccion'); }
+    get to_char() { return this.clienteForm.get('to_char'); }
+  
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+
+  setClient() {
+    let datos = this.clienteForm.value;
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    this.clienteForm.value.to_char = datos.to_char.toLocaleDateString("en-En", options);;
+    // console.log(this.clienteForm.value);
+  }
+  
+  
   crearCliente() {
-
-    console.log(this.cliente_nuevo);
-
-
-    this.restService.agregarCliente(this.cliente_nuevo).subscribe(
+    console.log(this.nombres.errors);
+    this.setClient();
+    this.restService.agregarCliente(this.clienteForm.value).subscribe(
         result => {
           console.log(' hola esto funciono ');
 
@@ -111,66 +145,32 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
             console.log(error);
         }
     );
-    this.openSnackBar('Cliente', 'Fue ingresado exitosamente');
-
-    // console.log('aqui ya funciona')
-    // nombre.value = '';
-    // apellido.value = '';
-    // edad.value = '';
-    // correo.value = '';
-    this.cliente_nuevo = null;
-    return false;
-  }
-}
-
-
-
-@Component({
-  selector: 'app-cs-form-client-dialog',
-  templateUrl: './cs-form-client-dialog.component.html',
-})
-export class CsFormClientDialogComponent {
-  // nombres = new FormControl('');
-  // correo = new FormControl('');
-  // apellidos = new FormControl('');
-  // direccion = new FormControl('');
-
-  clienteForm = this.fb.group ({
-    nombres: ['', Validators.required],
-    apellidos: ['', Validators.required],
-    correo: ['', Validators.required],
-    direccion: ['', Validators.required],
-    date: [new Date()]
-  })
-
-  constructor(
-    public dialogRef: MatDialogRef<CsFormClientDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ClienteElemento,
-    private fb: FormBuilder
-    ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
-
-  setClient() {
-    // console.log(this.data);
-    // const fecha = this.date.value;
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    // this.data.nombres = this.nombres.value;
-    // this.data.apellidos = this.apellidos.value;
-    // this.data.correo = this.correo.value;
-    // this.data.direccion = this.direccion.value;
-    let datos = this.clienteForm.value;
-    // console.log(datos.date)
-    // datos.date.toLocaleDateString("en-En", options);
-    this.data.nombres = datos.nombres;
-    this.data.apellidos = datos.apellidos;
-    this.data.to_char = datos.date.toLocaleDateString("en-En", options);;
-    this.data.direccion = datos.direccion;
-    this.data.correo = datos.correo;
-    // console.log(this.clienteForm.value);
-    console.log(this.data);
+  getErrorEmpty() {
+    return 'No puede estar vacio';
   }
+  getErrorEmail() {
+    return 'Debe ser un correo valido';
+  }
+  
+  getErrorFecha() {
+    return 'Debe ser una fecha valida con formato dd/mm/yyyy';
+  }
+
+  getErrorNombre() {
+    // console.log(atrib)
+    // return this.clienteForm.value.nombres.hasError('required') ? 'Debes de ingresar un valor' :
+    // this.email.hasError('email') ? 'Not a valid email'  :
+    //     '';   
+    return 'Debes ingresar un nombre ';
+  }
+  
+  // getErrorApellido() {
+  //   // console.log(atrib)
+  //   // return this.clienteForm.value.nombres.hasError('required') ? 'Debes de ingresar un valor' :
+  //   // this.email.hasError('email') ? 'Not a valid email'  :
+  //   //     '';   
+  //   return 'Debes ingresar un apellido ';
+  // }
 }

@@ -1,25 +1,28 @@
 
 <div class="dialog-cliente" [formGroup]="clienteForm">
-  <mat-form-field>
-    <input placeholder="Nombres" type="text" matInput formControlName="nombres" name="nombres">
+  <mat-form-field class="field">
+    <input placeholder="Nombres" type="text" matInput formControlName="nombres" name="nombres" required>
+    <mat-error *ngIf="nombres.invalid">{{getErrorEmpty()}}  </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input placeholder="Apellidos" type="text" matInput formControlName="apellidos" name="apellidos">
+  <mat-form-field class="field">
+    <input placeholder="Apellidos" type="text" matInput formControlName="apellidos" name="apellidos" required>
+    <mat-error *ngIf="apellidos.invalid">{{getErrorEmpty()}}  </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Fecha" [matDatepicker]="picker1" formControlName="date">
+  <mat-form-field class="field">
+    <input matInput placeholder="Fecha" [matDatepicker]="picker1" formControlName="to_char" required>
     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
+    <mat-error *ngIf="to_char.invalid">{{getErrorFecha()}}  </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input placeholder="Correo " type="text" matInput formControlName="correo" name="correo">
+  <mat-form-field class="field">
+    <input placeholder="Correo " type="text" matInput formControlName="correo" name="correo" required>
+    <mat-error *ngIf="correo.invalid">{{getErrorEmail()}}  </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input placeholder="Direccion " type="text" matInput formControlName="direccion" name="direccion">
+  <mat-form-field class="field">
+    <input placeholder="Direccion " type="text" matInput formControlName="direccion" name="direccion" required>
+    <mat-error *ngIf="direccion.invalid">{{getErrorEmpty()}}  </mat-error>
   </mat-form-field>
-  <div>
-    <button type="!clienteForm.valid" mat-raised-button color="primary" mat-button (click)="setClient()" [mat-dialog-close]="data">Ok</button>
+  <div class="field">
+    <button class="button" [disabled]="!clienteForm.valid" mat-raised-button color="primary" mat-button (click)="crearCliente()" [mat-dialog-close]="data">Ok</button>
   </div>
-  <p>Form Status: {{ clienteForm.status }}</p>
-  <p>Form Status: {{ clienteForm.valid }}</p>
 </div>
