@@ -4,5 +4,5 @@
 button( (click)='printer()') imprimir
 
 div(*ngFor='let producto of lista_productos')
-    app-cs-card-elemento-compra([producto_item]='producto')
+    app-cs-card-elemento-compra([producto_item]='producto', [resolve]='getOutput($event)')
 
