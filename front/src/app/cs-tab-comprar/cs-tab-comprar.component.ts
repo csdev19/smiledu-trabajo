@@ -28,7 +28,6 @@ export class CsTabComprarComponent implements OnInit {
   }
 
   getOutput(event) {
-    console.log('output');
     console.log(event);
   }
 
