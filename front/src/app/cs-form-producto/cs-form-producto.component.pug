@@ -1,0 +1,4 @@
+button(mat-stroked-button, color='primary', (click)='openDialog()')
+  | {{ msj }}
+button(*ngIf='producto_nuevo', mat-raised-button, color='primary', (click)='crearProducto()')
+  | Crear Producto

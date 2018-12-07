@@ -1,0 +1,21 @@
+form(*ngIf='!seeForm', method='', (submit)='crearProducto()')
+  div
+    label(for='')
+      | Nombre Producto: 
+      input(type='text', [(ngModel)]='nombre_producto', name='nombre_producto', [value]='nombre_producto')
+      p {{precio_show}}
+  div
+    label(for='')
+      | Precio: 
+      input(type='text', [(ngModel)]='precio', name='precio', [value]='precio')
+      p {{precio_show}}
+  div
+    | Categoria: 
+    select(name='categorias', [(ngModel)]='id_categoria')
+      option([value]='categoria.id_categoria', *ngFor='let categoria of categorias')
+        | {{ categoria.nombre_categoria }}
+  div
+    button((click)='updateVenta()')
+      | Actualizar Producto
+button(mat-raised-button, color='accent', (click)='isVisible()')
+  | {{ msj }}

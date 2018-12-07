@@ -1,0 +1,21 @@
+button(mat-stroked-button, color='accent', (click)='isVisible()') {{ msj }}
+div(*ngIf='seeTable')
+  table(mat-table, [dataSource]='ventas')
+    ng-container(matColumnDef='nombre_producto')
+      th(mat-header-cell, *matHeaderCellDef)  Nombre Producto 
+      td(mat-cell, *matCellDef='let venta')  {{ venta.nombre_producto }} 
+    ng-container(matColumnDef='nombres')
+      th(mat-header-cell, *matHeaderCellDef)  Nombre Cliente 
+      td(mat-cell, *matCellDef='let venta')  {{ venta.nombres }} 
+    ng-container(matColumnDef='to_char')
+      th(mat-header-cell, *matHeaderCellDef)  Fecha 
+      td(mat-cell, *matCellDef='let venta')  {{ venta.to_char }} 
+    ng-container(matColumnDef='precio_venta')
+      th(mat-header-cell, *matHeaderCellDef)  Precio Venta 
+      td(mat-cell, *matCellDef='let venta')  {{ venta.precio_venta }} 
+      //- tr
+    tr(mat-header-row, *matHeaderRowDef='atributosVenta; sticky: true')
+    tr(mat-row, *matRowDef='let row; columns: atributosVenta;')
+  button(mat-raised-button, color='accent', (click)='refresh()') Actualizar
+    //- tbody
+  //- // <button (click)="setListSales()">ver</button>

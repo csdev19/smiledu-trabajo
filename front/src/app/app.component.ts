@@ -17,5 +17,5 @@ export class AppComponent implements OnInit{
     // this.informacion = this._service.getMostrarClienteDB();
 
   }
-  title = 'front';
+  title = 'mini carrito de compras app';
 }

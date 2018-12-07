@@ -1,25 +1,25 @@
+
 <button mat-stroked-button color="accent" (click)="isVisible()">{{ msj }}</button>
-<div *ngIf='seeTable'>
+<div *ngIf="seeTable">
   <table mat-table [dataSource]="ventas">
     <ng-container matColumnDef="nombre_producto">
       <th mat-header-cell *matHeaderCellDef> Nombre Producto </th>
       <td mat-cell *matCellDef="let venta"> {{ venta.nombre_producto }} </td>
-    </ng-container> 
+    </ng-container>
     <ng-container matColumnDef="nombres">
       <th mat-header-cell *matHeaderCellDef> Nombre Cliente </th>
       <td mat-cell *matCellDef="let venta"> {{ venta.nombres }} </td>
-    </ng-container> 
+    </ng-container>
     <ng-container matColumnDef="to_char">
       <th mat-header-cell *matHeaderCellDef> Fecha </th>
       <td mat-cell *matCellDef="let venta"> {{ venta.to_char }} </td>
-    </ng-container> 
+    </ng-container>
     <ng-container matColumnDef="precio_venta">
       <th mat-header-cell *matHeaderCellDef> Precio Venta </th>
       <td mat-cell *matCellDef="let venta"> {{ venta.precio_venta }} </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="atributosVenta; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: atributosVenta;"></tr>  
+    <tr mat-row *matRowDef="let row; columns: atributosVenta;"></tr>
   </table>
   <button mat-raised-button color="accent" (click)="refresh()">Actualizar</button>
-  <!-- <button (click)="setListSales()">ver</button> -->
-</div>   
+</div>

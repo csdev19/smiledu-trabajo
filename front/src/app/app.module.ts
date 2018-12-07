@@ -12,6 +12,10 @@ import { MatButtonModule,
           MatIconModule,MatListModule
 } from "@angular/material";
 import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatCardModule} from '@angular/material/card';
+
 // import {MatFormFieldModule} from '@angular/material/form-field';
 // import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule} from '@angular/material/table';
@@ -33,8 +37,10 @@ import { CsFormProductoComponent,
 import { CsTableCategoriaComponent } from './cs-table-categoria/cs-table-categoria.component';
 import { CsTableProductoComponent } from './cs-table-producto/cs-table-producto.component';
 import { CsTableUpdateProductoComponent } from './cs-table-update-producto/cs-table-update-producto.component';
-import { ExampleNavbarComponent } from './example-navbar/example-navbar.component';
-import { LayoutModule } from '@angular/cdk/layout'
+import { LayoutModule } from '@angular/cdk/layout';
+import { CsTabComprarComponent } from './cs-tab-comprar/cs-tab-comprar.component';
+import { CsMainTabComponent } from './cs-main-tab/cs-main-tab.component';
+import { CsCardElementoCompraComponent } from './cs-card-elemento-compra/cs-card-elemento-compra.component'
 
 @NgModule({
   declarations: [
@@ -53,7 +59,9 @@ import { LayoutModule } from '@angular/cdk/layout'
     CsTableCategoriaComponent,
     CsTableProductoComponent,
     CsTableUpdateProductoComponent,
-    ExampleNavbarComponent,
+    CsTabComprarComponent,
+    CsMainTabComponent,
+    CsCardElementoCompraComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +83,9 @@ import { LayoutModule } from '@angular/cdk/layout'
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule, 
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule,
+    MatCardModule
     // MatMomentDateModule
   ],
   exports: [
@@ -88,11 +98,12 @@ import { LayoutModule } from '@angular/cdk/layout'
     // MatMomentDateModule,
     MatDatepickerModule, 
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatCardModule
   ],
-  providers: [
-    // {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}}
-  ],
+  providers: [],
   entryComponents: [
     CsFormCategoriaComponent, CsFormCategoriaDialogComponent,
     CsFormClientComponent, CsFormClientDialogComponent,

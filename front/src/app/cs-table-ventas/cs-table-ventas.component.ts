@@ -19,7 +19,7 @@ export class CsTableVentasComponent implements OnInit {
   productos;
   clientes;
   lista_ventas: Array<Venta>;
-  seeTable: boolean = true;
+  seeTable: boolean = false;
   msj: string = 'Mostrar Tabla de Ventas'
   sales_titles: Array<string> = ['id_producto','id_cliente','fecha_compra','precio_venta',]
   
@@ -28,7 +28,7 @@ export class CsTableVentasComponent implements OnInit {
     this.restService.getMostrarVentasDB()
       .subscribe(ventas => {
         this.ventas = ventas;
-        console.log(this.ventas);
+        // console.log(this.ventas);
       });
  
       // this.setListSales();
@@ -40,7 +40,7 @@ export class CsTableVentasComponent implements OnInit {
       this.restService.getMostrarVentasDB()
       .subscribe(ventas => {
         this.ventas = ventas;
-        console.log(this.ventas);
+        // console.log(this.ventas);
       });
     }
 

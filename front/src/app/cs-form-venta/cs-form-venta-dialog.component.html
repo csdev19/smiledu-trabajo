@@ -1,37 +1,20 @@
-<div mat-dialog-content class="dialog-venta">
-    <mat-form-field >
-      <mat-select placeholder="Cliente" [(value)]="id_cliente" >
-          <!-- formControlName="" -->
-        <mat-option *ngFor="let cliente of clientes"
-        [value]="cliente.id_cliente">
-          {{ cliente.nombres }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field >
-      <mat-select placeholder="Productos" [(value)]="id_producto" >
-            <!-- formControlName="" -->
-        <mat-option *ngFor="let producto of productos"
-        [value]="producto.id_producto">
-          {{ producto.nombre_producto }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <input  placeholder="Precio Producto " type="text" matInput  
-      [(ngModel)]="data.precio_venta"  name="nombre_producto" >
-    </mat-form-field>
-<!-- 
-    <p>{{ data.nombre_producto}}</p>
-    <p>{{ data.precio}}</p>
-   -->
-    <div>
-      <button mat-raised-button color="primary" mat-button 
-      [mat-dialog-close]="data" cdkFocusInitial (click)="setSale()">Ok</button>
-    </div>
+
+<div class="dialog-venta" mat-dialog-content>
+  <mat-form-field>
+    <mat-select placeholder="Cliente" [(value)]="id_cliente">
+      <mat-option *ngFor="let cliente of clientes" [value]="cliente.id_cliente">{{ cliente.nombres }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Productos" [(value)]="id_producto">
+      <mat-option *ngFor="let producto of productos" [value]="producto.id_producto">{{ producto.nombre_producto }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input placeholder="Precio Producto " type="text" matInput [(ngModel)]="data.precio_venta" name="nombre_producto">
+  </mat-form-field>
+  <div>
+    <button mat-raised-button color="primary" mat-button [mat-dialog-close]="data" cdkfocusinitial (click)="setSale()">Ok</button>
   </div>
-
-
-<button mat-stroked-button color="primary" (click)='isVisible()'>
-
- 
+</div>
+<button mat-stroked-button="" color="primary" (click)="isVisible()"></button>

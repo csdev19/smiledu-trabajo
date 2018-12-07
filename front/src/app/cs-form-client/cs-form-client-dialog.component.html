@@ -1,35 +1,28 @@
-<div mat-dialog-content class="dialog-cliente">
-  <mat-form-field>
-    <input  placeholder="Nombres " type="text" matInput  
-    [(ngModel)]="data.nombres"  name="nombres" [value]="nombres">
+
+<div class="dialog-cliente" [formGroup]="clienteForm">
+  <mat-form-field class="field">
+    <input placeholder="Nombres" type="text" matInput formControlName="nombres" name="nombres" required>
+    <mat-error *ngIf="nombres.invalid">{{getErrorEmpty()}}  </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input  placeholder="Apellidos" type="text" matInput  
-    [(ngModel)]="data.apellidos"  name="apellidos" [value]="apellidos">
+  <mat-form-field class="field">
+    <input placeholder="Apellidos" type="text" matInput formControlName="apellidos" name="apellidos" required>
+    <mat-error *ngIf="apellidos.invalid">{{getErrorEmpty()}}  </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker1" placeholder="Fecha" [formControl]="date">
+  <mat-form-field class="field">
+    <input matInput placeholder="Fecha" [matDatepicker]="picker1" formControlName="to_char" required>
     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
+    <mat-error *ngIf="to_char.invalid">{{getErrorFecha()}}  </mat-error>
   </mat-form-field>
-  <!-- <button (click)="escribir()" >imprimir</button> -->
-  <!-- <mat-form-field>
-    <input  placeholder="Fecha " type="text" matInput  
-    [(ngModel)]="data.to_char"  name="fecha" [value]="fecha">
-  </mat-form-field> -->
-  <mat-form-field>
-    <input  placeholder="Correo " type="text" matInput  
-    [(ngModel)]="data.correo"  name="correo" [value]="correo">
+  <mat-form-field class="field">
+    <input placeholder="Correo " type="text" matInput formControlName="correo" name="correo" required>
+    <mat-error *ngIf="correo.invalid">{{getErrorEmail()}}  </mat-error>
   </mat-form-field>
-  <mat-form-field>
-    <input  placeholder="Direccion " type="text" matInput  
-    [(ngModel)]="data.direccion"  name="direccion" [value]="direccion">
+  <mat-form-field class="field">
+    <input placeholder="Direccion " type="text" matInput formControlName="direccion" name="direccion" required>
+    <mat-error *ngIf="direccion.invalid">{{getErrorEmpty()}}  </mat-error>
   </mat-form-field>
-
-
-  <div>
-    <button mat-raised-button color="primary" mat-button 
-    [mat-dialog-close]="data" cdkFocusInitial (click)="setClient()" 
-    >Ok</button>
+  <div class="field">
+    <button class="button" [disabled]="!clienteForm.valid" mat-raised-button color="primary" mat-button (click)="crearCliente()" [mat-dialog-close]="data">Ok</button>
   </div>
 </div>

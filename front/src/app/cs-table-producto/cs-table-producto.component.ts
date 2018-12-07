@@ -23,7 +23,7 @@ export class CsTableProductoComponent implements OnInit {
     this.restService.getMostrarProductoTablaDB()
       .subscribe( producto => {
         this.productos = producto;
-        console.log(producto);
+        // console.log(producto);
       })
 
       
@@ -53,7 +53,7 @@ export class CsTableProductoComponent implements OnInit {
     this.restService.getMostrarProductoTablaDB()
       .subscribe( producto => {
         this.productos = producto;
-        console.log(producto);
+        // console.log(producto);
       })
   }
 

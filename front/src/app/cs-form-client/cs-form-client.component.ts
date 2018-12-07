@@ -1,10 +1,16 @@
+// 
 import { Component, OnInit, Inject } from '@angular/core';
 import { RestService } from "../rest.service"; 
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { FormControl} from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
+// ANGULAR MATERIAL IMPORTS
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {FormControl} from '@angular/forms';
+
 
 export interface ClienteElemento {
   nombres: string,
@@ -21,14 +27,12 @@ export interface ClienteElemento {
   styleUrls: ['./cs-form-client.component.css']
 })
 export class CsFormClientComponent implements OnInit, MatInputModule {
-  // categoria: string = '';
-  // @ViewChild('categoria_producto') categoria_producto;
-  // @ViewChild('edad') edad;
-  // categorias;
+
+  // Para el boton
   msj: string = 'Mostrar formulario de cliente';
   seeForm: boolean = false;
   cliente_nuevo: ClienteElemento;
-  // date = new FormControl(new Date());
+
   
   nombres;
   apellidos;
@@ -36,73 +40,41 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
   correo;
   direccion;
   
-  constructor(private restService: RestService, public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog, 
+    public snackBar: MatSnackBar
+  ) {}
   
   ngOnInit() {
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CsFormClientDialogComponent, {
-      width: '800px',
+      width: '400px',
       data: {
-        nombres: this.nombres,
-        apellidos: this.apellidos,
-        to_char: this.to_char,
-        correo:	this.correo,
-        direccion: this.direccion,
+        exito: false
       }
     });
+
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      // this.nombre_categoria = result;
-      this.setCliente(result)
+      if (result.exito) {
+        this.openSnackBar('Cliente', 'Fue ingresado exitosamente');
+      } else {
+        this.openSnackBar('Cliente', 'No fue creado exitosamente');
+      }
     });
   }
 
-  setCliente(result: any): any {
-    this.cliente_nuevo = {
-      nombres: result.nombres,
-      apellidos: result.apellidos,
-      to_char: result.to_char,
-      correo:	result.correo,
-      direccion: result.direccion
-    }
 
-    console.log(this.cliente_nuevo);
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
-
-
-  crearCliente() {
-    // let cliente = {
-    //     'nombre': nombre.value,
-    //     'apellido': apellido.value,
-    //     'edad': edad.value,
-    //     'correo': correo.value,
-    //     'categoria': this.categoria_producto.nativeElement.value
-    // };
-
-
-    console.log(this.cliente_nuevo);
-
-    this.restService.agregarCliente(this.cliente_nuevo).subscribe(
-        result => {
-            console.log('work');
-        }, 
-        error => {
-            console.log(error);
-        }
-    );
-
-    // nombre.value = '';
-    // apellido.value = '';
-    // edad.value = '';
-    // correo.value = '';
-    this.cliente_nuevo = null;
-    return false;
-  }
-  
 
 }
 
@@ -111,13 +83,36 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
 @Component({
   selector: 'app-cs-form-client-dialog',
   templateUrl: './cs-form-client-dialog.component.html',
+  styleUrls: ['./cs-form-client-dialog.component.css']
 })
 export class CsFormClientDialogComponent {
-  date = new FormControl(new Date());
+  // nombres = new FormControl('');
+  // correo = new FormControl('');
+  // apellidos = new FormControl('');
+  // direccion = new FormControl('');
+
+  clienteForm = this.fb.group ({
+    'nombres': ['', Validators.required],
+    'apellidos': ['', Validators.required],
+    'correo': ['', Validators.email],
+    'direccion': ['', Validators.required],
+    'to_char': [new Date(), Validators.required]
+    // date: [new Date()]
+  })
 
   constructor(
+    private restService: RestService, 
     public dialogRef: MatDialogRef<CsFormClientDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ClienteElemento) {}
+    @Inject(MAT_DIALOG_DATA) public data: ClienteElemento,
+    private fb: FormBuilder
+    ) {}
+
+    get nombres() { return this.clienteForm.get('nombres'); }
+    get apellidos() { return this.clienteForm.get('apellidos'); }
+    get correo() { return this.clienteForm.get('correo'); }
+    get direccion() { return this.clienteForm.get('direccion'); }
+    get to_char() { return this.clienteForm.get('to_char'); }
+  
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -125,8 +120,45 @@ export class CsFormClientDialogComponent {
 
 
   setClient() {
-    const fecha = this.date.value;
+    let datos = this.clienteForm.value;
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    this.data.to_char = fecha.toLocaleDateString("en-En", options);
+    this.clienteForm.value.to_char = datos.to_char.toLocaleDateString("en-En", options);;
+    // console.log(this.clienteForm.value);
+  }
+  
+  
+  crearCliente() {
+    console.log(this.nombres.errors);
+    this.setClient();
+    this.restService.agregarCliente(this.clienteForm.value).subscribe(
+        result => {
+          console.log(' hola esto funciono ');
+
+          if(result) {
+            console.log(result);
+            // this.openSnackBar('Cliente', 'Fue ingresado exitosamente');
+          } else {
+            // this.openSnackBar('Cliente', 'Hubo un error');
+          }
+        }, 
+        error => {
+            console.log(error);
+        }
+    );
+  }
+
+  getErrorEmpty() {
+    return 'No puede estar vacio';
+  }
+  getErrorEmail() {
+    return 'Debe ser un correo valido';
+  }
+  
+  getErrorFecha() {
+    return 'Debe ser una fecha valida con formato dd/mm/yyyy';
+  }
+
+  getErrorNombre() {
+    return 'Debes ingresar un nombre ';
   }
 }

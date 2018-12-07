@@ -32,31 +32,31 @@ export class CsFormCategoriaComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       this.nombre_categoria = result;
-      if (this.itsEmpty(result)){
-        // cuando esta vacio
-      } else {
-        this.setCategoria(result)
-      }
+      // if (this.itsEmpty(result)){
+      //   // cuando esta vacio
+      // } else {
+      //   this.setCategoria(result)
+      // }
     });
   }
   
-  itsEmpty(obj){
-    let value = false;
-    for (let i of obj) {
-      if (obj[]) {
+  // itsEmpty(obj){
+  //   let value = false;
+  //   for (let i of obj) {
+  //     if (obj[]) {
         
-      }
-    }
-    return value;
-  }
+  //     }
+  //   }
+  //   return value;
+  // }
 
-  setCategoria(nombre_categoria) {
+  setCategoria(nombre_categoria: string): void {
     this.categoria_nueva = {
       nombre_categoria : nombre_categoria
     };
   }  
   
-  crearCategoria() {
+  crearCategoria(): boolean{
     console.log(this.categoria_nueva);
     
     this.restService.agregarCategoria(this.categoria_nueva)
