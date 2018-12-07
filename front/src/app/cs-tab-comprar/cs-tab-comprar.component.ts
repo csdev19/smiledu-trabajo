@@ -12,6 +12,7 @@ const IMAGEN = 'http://www.cartonfast.com/wp-content/uploads/2016/06/caja_de_car
 }) 
 export class CsTabComprarComponent implements OnInit {
 
+
   imagen = IMAGEN;
   lista_productos: Array<object>;
 
@@ -24,6 +25,11 @@ export class CsTabComprarComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getOutput(event) {
+    console.log('output');
+    console.log(event);
   }
 
   printer(){
