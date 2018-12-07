@@ -19,7 +19,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material';
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
 import { Clientes } from './clientes/clientes.component';
 import { CsFormClientComponent,CsFormClientDialogComponent } from './cs-form-client/cs-form-client.component';
