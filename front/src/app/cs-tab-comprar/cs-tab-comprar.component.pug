@@ -1,8 +1,20 @@
 
 //- img([src]="imagen", alt="")
 
-button( (click)='printer()') imprimir
+//- button( (click)='borrar()') borrar
 
-div(*ngFor='let producto of lista_productos')
+div.comp(*ngFor='let producto of lista_productos')
     app-cs-card-elemento-compra([producto_item]='producto', (resolve)='getOutput($event)')
 
+div.tabla
+    //- div(*ngIf='noExiste()')
+    app-cs-tabla-carrito([cambiado]='cambios')
+
+
+br
+br
+br
+br
+br
+br
+br

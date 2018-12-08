@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { StorageServiceModule } from 'angular-webstorage-service';
+
 
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +17,8 @@ import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 // import {MatFormFieldModule} from '@angular/material/form-field';
 // import {MatFormFieldModule} from '@angular/material/form-field';
@@ -40,7 +44,8 @@ import { CsTableUpdateProductoComponent } from './cs-table-update-producto/cs-ta
 import { LayoutModule } from '@angular/cdk/layout';
 import { CsTabComprarComponent } from './cs-tab-comprar/cs-tab-comprar.component';
 import { CsMainTabComponent } from './cs-main-tab/cs-main-tab.component';
-import { CsCardElementoCompraComponent } from './cs-card-elemento-compra/cs-card-elemento-compra.component'
+import { CsCardElementoCompraComponent } from './cs-card-elemento-compra/cs-card-elemento-compra.component';
+import { CsTablaCarritoComponent, CsTablaCarritoDialogComponent } from './cs-tabla-carrito/cs-tabla-carrito.component'
 
 @NgModule({
   declarations: [
@@ -62,6 +67,8 @@ import { CsCardElementoCompraComponent } from './cs-card-elemento-compra/cs-card
     CsTabComprarComponent,
     CsMainTabComponent,
     CsCardElementoCompraComponent,
+    CsTablaCarritoComponent,
+    CsTablaCarritoDialogComponent  
   ],
   imports: [
     BrowserModule,
@@ -85,7 +92,9 @@ import { CsCardElementoCompraComponent } from './cs-card-elemento-compra/cs-card
     MatNativeDateModule, 
     MatSelectModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    StorageServiceModule,
+    MatPaginatorModule
     // MatMomentDateModule
   ],
   exports: [
@@ -101,14 +110,16 @@ import { CsCardElementoCompraComponent } from './cs-card-elemento-compra/cs-card
     MatSelectModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
   ],
   providers: [],
   entryComponents: [
     CsFormCategoriaComponent, CsFormCategoriaDialogComponent,
     CsFormClientComponent, CsFormClientDialogComponent,
     CsFormProductoComponent, CsFormProductoDialogComponent,
-    CsFormVentaDialogComponent, CsFormVentaComponent
+    CsFormVentaDialogComponent, CsFormVentaComponent,
+    CsTablaCarritoDialogComponent
   ],
   bootstrap: [AppComponent]
 })

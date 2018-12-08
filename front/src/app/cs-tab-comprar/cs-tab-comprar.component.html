@@ -1,5 +1,7 @@
 
-<button (click)="printer()">imprimir</button>
-<div *ngFor="let producto of lista_productos">
+<div class="comp" *ngFor="let producto of lista_productos">
   <app-cs-card-elemento-compra [producto_item]="producto" (resolve)="getOutput($event)"></app-cs-card-elemento-compra>
 </div>
+<div class="tabla">
+  <app-cs-tabla-carrito [cambiado]="cambios"></app-cs-tabla-carrito>
+</div><br><br><br><br><br><br><br>

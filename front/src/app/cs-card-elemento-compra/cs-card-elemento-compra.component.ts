@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-
 const IMAGEN = 'http://www.cartonfast.com/wp-content/uploads/2016/06/caja_de_carton_cartonfast_americana-750x750.jpg';
 
 
@@ -16,16 +15,20 @@ export class CsCardElementoCompraComponent implements OnInit {
 
   @Output() resolve = new EventEmitter(); 
 
-  constructor() {}
+  constructor(
+  ) {}
 
   ngOnInit() {
   }
 
   ver() {
     console.log(this.producto_item);
-    this.cardEmitter();
   }
-  
+  agregar() {
+    console.log('enviado')
+    this.cardEmitter();
+  }  
+
   cardEmitter() {
     console.log('se devolvio '+ this.producto_item);
     this.resolve.emit(this.producto_item);

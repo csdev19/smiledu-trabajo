@@ -2,13 +2,13 @@
   mat-card(class="example-card")
     mat-card-header
       div(mat-card-avatar class="example-header-image")
-      mat-card-title Compra 1
-      mat-card-subtitle Compra 2 dasd asd s
+      mat-card-title {{ producto_item.nombre_producto}}
+      mat-card-subtitle {{ producto_item.nombre_categoria}}
     img.imagen(mat-card-image [src]="imagen" alt="Photo of a Shiba Inu")
     mat-card-content
       p
-      |  Este elemeto {{ card-content }}
+      |  Este producto cuesta {{ producto_item.precio}}
     mat-card-actions
-      button(mat-button)  AGREGAR
+      button(mat-button, (click)='agregar()')  AGREGAR
       button(mat-button, (click)='ver()')  VER
 //- <button mat-button>SHARE</button>

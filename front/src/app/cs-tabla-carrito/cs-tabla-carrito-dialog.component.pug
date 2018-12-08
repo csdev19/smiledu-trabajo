@@ -1,0 +1,6 @@
+h1(mat-dialog-title) Confirmacion de Compra
+div(mat-dialog-content)
+  p Estas seguro de comprar estos productos?
+div(mat-dialog-actions)
+  button(mat-button,(click)="onNoClick()") No
+  button(mat-button,[mat-dialog-close]='data.cambiado',cdkFocusInitial) Si
