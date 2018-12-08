@@ -2,18 +2,14 @@
 //- img([src]="imagen", alt="")
 
 //- button( (click)='borrar()') borrar
-
-mat-form-field
-  mat-select([(value)]="selected_client",placeholder='Escoje cliente')
-    mat-option(*ngFor='let cliente of clientes',[value]="cliente.id_cliente") {{ cliente.nombres }}
-  p {{ selected_client }} 
-
+div
+    
 div.comp(*ngFor='let producto of lista_productos')
-    app-cs-card-elemento-compra([producto_item]='producto', [id_cliente]='selected_client' ,(resolve)='getOutput($event)')
+    app-cs-card-elemento-compra([valid_card]='card_valid',[producto_item]='producto', (resolve)='getOutput($event)')
 
 div.tabla
     //- div(*ngIf='noExiste()')
-    app-cs-tabla-carrito([cambiado]='cambios')
+    app-cs-tabla-carrito([cambiado]='cambios',[total_ingreso]="total_ingreso",(resta_elemento)='recibirEliminado($event)')
 
 
 br

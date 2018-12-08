@@ -6,9 +6,9 @@
       mat-card-subtitle {{ producto_item.nombre_categoria}}
     img.imagen(mat-card-image [src]="imagen" alt="Photo of a Shiba Inu")
     mat-card-content
-      p
+      h3
       |  Este producto cuesta {{ producto_item.precio}}
     mat-card-actions
-      button(mat-button, (click)='agregar()')  AGREGAR
-      button(mat-button, (click)='ver()')  VER
+      button(mat-button, (click)='agregar()', [disabled]='!valid_card')  AGREGAR
+      //- button(mat-button, (click)='ver()')  VER
 //- <button mat-button>SHARE</button>

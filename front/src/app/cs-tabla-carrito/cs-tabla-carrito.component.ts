@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, DoCheck, OnChanges, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, DoCheck, OnChanges, Inject, EventEmitter, Output } from '@angular/core';
 import { StorageHandlerService} from '../storage-handler.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
@@ -20,13 +20,16 @@ export interface ProductoInfo {
 })
 export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
   @Input() cambiado = '';
-
+  @Input() total_ingreso = 0;
+  @Output() resta_elemento = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   total: number = 0;
   aceptado : boolean;
+  elemento_resta : number;
   lista_compras;
-  
+  @Output() precio_total_actual = new EventEmitter()
+
   displayedColumns: Array<string> = ['id_categoria', 'id_producto', 'nombre_categoria', 'nombre_producto', 'precio', 'id_categ']
   displayedFooterColumns: Array<string> = ['item', 'cost']
   dataSource: MatTableDataSource<ProductoInfo>;
@@ -37,6 +40,51 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
     private restService: RestService,
   ) {
     this.OnRefresh();
+  }
+  
+  ngOnInit() {
+    // console.log('esto se inicio ');
+    // console.log(this.cambiado);
+    this.dataSource.paginator = this.paginator;
+
+    this.dataSource.sort = this.sort;
+  }
+
+  ngOnChanges() {
+    this.OnRefresh();
+  }
+  
+  ngDoCheck() {}
+
+  OnRefresh() {
+    let info_storage = this.storage.getOnLocalStorage();
+    if (this.storage.isEmpty()) {
+      this.dataSource = new MatTableDataSource(); 
+    } else {
+      this.dataSource = new MatTableDataSource(info_storage); 
+      // this.getListNumbers(info_storage);
+    }
+  }
+
+  borrarItem(id) {
+    console.log('se borro');
+    let monto_eliminado = this.storage.getOnLocalStorage()[id];
+    console.log(monto_eliminado);
+    this.elemento_resta = monto_eliminado;
+    this.delEmitter();
+    this.storage.deleteOnLocalStorageById(id);
+    // console.log('porque no apareces')
+    this.OnRefresh();
+  }
+  
+  delEmitter() {
+    // console.log('se devolvio '+ this.producto_item);
+    this.resta_elemento.emit(this.elemento_resta);
+  }
+
+  vaciarStorage() {    
+    this.storage.deleteOnLocalStorage();
+    this.total = 0;
   }
 
   openDialog(): void {
@@ -73,63 +121,6 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
     });
   }
 
-
-  
-  ngOnInit() {
-    console.log('esto se inicio ');
-    console.log(this.cambiado);
-    this.dataSource.paginator = this.paginator;
-
-    this.dataSource.sort = this.sort;
-  }
-
-  ngOnChanges() {
-    this.OnRefresh();
-  }
-  
-  ngDoCheck() {}
-
-  OnRefresh() {
-    let info_storage = this.storage.getOnLocalStorage();
-    if (this.storage.isEmpty()) {
-      this.dataSource = new MatTableDataSource(); 
-    } else {
-      this.dataSource = new MatTableDataSource(info_storage); 
-      this.getListNumbers(info_storage);
-    }
-  }
-
-
-  getListNumbers(lista) {
-    let valores_monedas = lista.map( (value) => {
-      let money = value.precio;
-      let precio = money.slice(0, money.length  - 1 );
-      if (money.search('.') != -1) {
-        precio = precio.replace(".","")
-      }
-      if (money.search(',') != -1) {
-          precio = precio.replace(",",".")
-      }
-      return parseFloat(precio);
-    })
-    
-    // console.log(valores_monedas);
-    this.total = valores_monedas.reduce( (acum, value) => {
-      return acum + value
-    }, 0);
-  }
-
-  borrarItem(id) {
-    // console.log('se borro');
-    this.storage.deleteOnLocalStorageById(id);
-    // console.log('porque no apareces')
-    this.OnRefresh();
-  }
-  
-  vaciarStorage() {    
-    this.storage.deleteOnLocalStorage();
-    this.total = 0;
-  }
 }
 
 @Component({
@@ -148,9 +139,5 @@ export class CsTablaCarritoDialogComponent {
   onNoClick(): void {
     console.log(this.data);
     this.dialogRef.close();
-  }
-  
+  } 
 }
-
-
-

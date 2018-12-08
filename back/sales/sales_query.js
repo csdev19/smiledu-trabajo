@@ -31,7 +31,8 @@ where v.id_cliente=c.id_cliente and v.id_producto=p.id_producto order by v.fecha
 // where v.id_cliente=c.id_cliente and v.id_producto=p.id_producto order by v.fecha_compra desc;
 
 function crearVenta(venta) {
-
+    console.log('hola estas en el query');
+    console.log(venta);
     return new Promise((resolve , reject) => {
         let sql = `INSERT INTO public.ventas(
                       id_producto, id_cliente, precio_venta)

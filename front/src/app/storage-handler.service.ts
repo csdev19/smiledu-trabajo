@@ -51,8 +51,8 @@ export class StorageHandlerService {
     // console.log(id);
     // console.log('hola wtf?',lista[id]);
     // console.log(lista[id]);
-    console.log(lista[id]);
-    console.log(lista_nueva);
+    // console.log(lista[id]);
+    // console.log(lista_nueva);
     this.storage.set(STORAGE_KEY, lista_nueva);
 
     // return this.storage.remove(lista[id]);

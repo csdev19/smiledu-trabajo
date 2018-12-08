@@ -7,11 +7,10 @@
       <mat-card-subtitle>{{ producto_item.nombre_categoria}}</mat-card-subtitle>
     </mat-card-header><img class="imagen" mat-card-image [src]="imagen" alt="Photo of a Shiba Inu">
     <mat-card-content>
-      <p></p> Este producto cuesta {{ producto_item.precio}}
+      <h3></h3> Este producto cuesta {{ producto_item.precio}}
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button (click)="agregar()"> AGREGAR</button>
-      <button mat-button (click)="ver()"> VER</button>
+      <button mat-button (click)="agregar()" [disabled]="!valid_card"> AGREGAR</button>
     </mat-card-actions>
   </mat-card>
 </div>
