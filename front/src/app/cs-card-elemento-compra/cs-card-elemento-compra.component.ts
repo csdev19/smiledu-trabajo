@@ -12,7 +12,7 @@ const IMAGEN = 'http://www.cartonfast.com/wp-content/uploads/2016/06/caja_de_car
 export class CsCardElementoCompraComponent implements OnInit {
   imagen = IMAGEN;
   @Input() producto_item;
-
+  @Input() id_cliente;
   @Output() resolve = new EventEmitter(); 
 
   constructor(
@@ -25,7 +25,12 @@ export class CsCardElementoCompraComponent implements OnInit {
     console.log(this.producto_item);
   }
   agregar() {
-    console.log('enviado')
+    console.log('estamos en card')
+    console.log(this.producto_item)
+    console.log('cliente es: ', this.id_cliente);
+    this.producto_item['id_cliente'] = this.id_cliente;
+    this.producto_item['precio_venta'] = this.producto_item.precio;
+    console.log(this.producto_item)
     this.cardEmitter();
   }  
 

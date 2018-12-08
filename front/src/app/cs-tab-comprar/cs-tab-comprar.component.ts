@@ -14,7 +14,8 @@ export class CsTabComprarComponent implements OnInit {
   cambios: boolean;
   imagen = IMAGEN;
   lista_productos: Array<object>;
-
+  clientes ;
+  selected_client: number = 1;
   constructor(
     private restService: RestService,
     private storage: StorageHandlerService
@@ -24,7 +25,12 @@ export class CsTabComprarComponent implements OnInit {
         this.lista_productos = producto;
         // console.log(producto);
       })
-      
+
+    this.restService.getMostrarClienteDB()
+      .subscribe(clientes => {
+        this.clientes = clientes;
+        console.log(this.clientes);
+      });  
     // this.storage.storeOnLocalStorage(this.lista_productos[0]);
   }
 
@@ -38,7 +44,8 @@ export class CsTabComprarComponent implements OnInit {
   }
 
   getOutput(event) {
-    // console.log(event);
+    console.log('estamos en getoutput');
+    console.log(event);
     // this.cambios = event;
     this.cambios = !this.cambios;
     this.storage.storeOnLocalStorage(event);

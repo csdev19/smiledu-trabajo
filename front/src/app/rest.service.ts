@@ -63,7 +63,12 @@ export class RestService {
     // console.log("llamaste a la api venta");
     return this.http.post(`${this.url}sales/crear-venta`, nuevaVenta, httpOptions)
   }
-
+  
+  agregarComprasCarrrito(lista_venta): Observable<any> {
+    console.log('estas en el rest');
+    console.log(lista_venta);
+    return this.http.post(`${this.url}sales/venta-carrito`, lista_venta, httpOptions)
+  }
 
 //              ACTUALIZAR
 actualizarProducto(obj): Observable<any> {

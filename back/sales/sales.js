@@ -22,5 +22,20 @@ router.post('/crear-venta',async function (req, res) {
     res.send(result);
  })
  
+ 
+router.post('/venta-carrito',async function (req, res) {
+    console.log('estas en el back');
+    let lista_ventas = req.body;
+    console.log(lista_ventas)
+    await db.connectBD();
+    for(let i=0; i <= lista_ventas.length; i++) {
+        console.log(lista_ventas[i]);
+        let result = await venta_q.crearVenta(lista_ventas[i])
+    }
+    res.send(result);
+    // res.send('hola estas en listar-ventaes');
+    // console.log("hola estas en crear-venta");
+ })
+ 
 
 module.exports = router;

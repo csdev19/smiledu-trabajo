@@ -87,6 +87,7 @@ app.delete('/eliminar-categoria',async function (req, res) {
     let result = await category_q.addCategories(categoria);
     // res.send('hola estas en listar-ventaes');
     console.log("hola estas en crear-categoria");
+    console.log("hola estas en crear-categoria");
     res.send(result);
  })
 
@@ -95,5 +96,6 @@ var server = app.listen(8081, function () {
    var port = server.address().port
    
    console.log("Example app listening at http://%s:%s", host, port)
+   console.log('hola que paso ?')
 })
 

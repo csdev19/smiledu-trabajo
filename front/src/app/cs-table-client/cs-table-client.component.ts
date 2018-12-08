@@ -10,6 +10,7 @@ export class CsTableClientComponent implements OnInit {
   seeTable: boolean = false;
   msj: string = 'Mostrar Tabla de cliente';
   clientes = clients;
+  selected;
   clients_titles: Array<string> = ['Nombres','Apellidos','Direccion','Fecha de Naciminento','correo'];
   constructor( private restService: RestService) {
     // this.restService.getMostrarClienteDB()

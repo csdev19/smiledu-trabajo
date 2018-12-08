@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Input, DoCheck, OnChanges, Inject } from 
 import { StorageHandlerService} from '../storage-handler.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { RestService } from '../rest.service';
 
 
 export interface ProductoInfo {
@@ -24,6 +25,7 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
   @ViewChild(MatSort) sort: MatSort;
   total: number = 0;
   aceptado : boolean;
+  lista_compras;
   
   displayedColumns: Array<string> = ['id_categoria', 'id_producto', 'nombre_categoria', 'nombre_producto', 'precio', 'id_categ']
   displayedFooterColumns: Array<string> = ['item', 'cost']
@@ -31,7 +33,8 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
   
   constructor(
     private storage: StorageHandlerService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private restService: RestService,
   ) {
     this.OnRefresh();
   }
@@ -50,7 +53,19 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
       if (result == undefined) {
         console.log('no acepto');
       } else {
-        console.log(this.storage.getOnLocalStorage())
+        let lista_compras = this.storage.getOnLocalStorage();
+        console.log(lista_compras);
+        this.lista_compras = lista_compras
+        this.restService.agregarComprasCarrrito(this.lista_compras).subscribe(
+          result => {
+            // console.log(result);
+            return 'work';
+          }, 
+          error => {
+            // console.log(error);
+          }
+          );
+        // console.log(this.storage.getOnLocalStorage())
         this.vaciarStorage();
         // this.storage.deleteOnLocalStorage();
         this.OnRefresh();
