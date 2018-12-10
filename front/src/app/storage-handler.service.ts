@@ -1,5 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 const STORAGE_KEY = 'items_comprados';
 
@@ -8,9 +10,14 @@ const STORAGE_KEY = 'items_comprados';
 })
 export class StorageHandlerService {
   identificador: number = 0;
+  informacion;
+  
   constructor(
     @Inject(SESSION_STORAGE) private storage: StorageService
-  ) {}
+  ) {
+    this.informacion = this.getOnLocalStorageOld();
+    console.log(this.informacion)
+  }
 
 
   public storeOnLocalStorage(item: object): number {
@@ -25,9 +32,23 @@ export class StorageHandlerService {
     return this.identificador;
   }
   
+  public getOnLocalStorageOld() {
+    console.log(this.storage.get(STORAGE_KEY));
+    return this.storage.get(STORAGE_KEY) || [];
+  }
+  
   public getOnLocalStorage() {
-    // console.log(this.storage.get(STORAGE_KEY));  
+    console.log(this.storage.get(STORAGE_KEY));
     return this.storage.get(STORAGE_KEY) || 'empty';
+  }
+  
+
+  public getOnLocalStorageObservable():Observable<any> {
+    // let observableStorage = Observable.create( () =>)
+    let observableStorage = new Observable ( observer => {
+      observer.next(this.informacion);
+    })
+    return observableStorage;
   }
 
   public deleteOnLocalStorage() {

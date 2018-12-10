@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-//import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
-//import { Observable, of } from "rxjs";
-//import { map, catchError, tap } from "rxjs/operators";
-//import 'rxjs/add/operator/map';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -11,10 +7,8 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class RestService {
-  url= 'http://localhost:8081/';
-  constructor(private http: HttpClient) {
-
-  }
+  url = 'http://localhost:8081/';
+  constructor(private http: HttpClient) {}
 
 //////////////    MOSTRAR 
 

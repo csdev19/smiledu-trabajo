@@ -39,13 +39,10 @@ function crearVenta(venta) {
                       VALUES ($1, $2, $3);`;
         global.dbp.none(sql, [venta['id_producto'], venta['id_cliente'], venta['precio_venta'] ])
           .then(res => {
-          //   return resolve(res);
-             // ahora deberiamos decir si funciono 
-            //  console.log('funciono'+res);
+            console.log('hola');
              return 'Funciono';
           }).catch(err => {
-          //   return reject(err);
-            //  console.log(err);
+            console.log('hola');
              return 'Hubo un error';
           });
     });

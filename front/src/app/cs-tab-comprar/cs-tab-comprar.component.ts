@@ -11,13 +11,14 @@ const IMAGEN = 'http://www.cartonfast.com/wp-content/uploads/2016/06/caja_de_car
   styleUrls: ['./cs-tab-comprar.component.css']
 }) 
 export class CsTabComprarComponent implements OnInit {
+  lista_productos: Array<object>;
+  
   cambios: boolean;
-  total_ingreso: number = 0;
+  total_ingreso;
   total_ingreso_calculo: number = 0;
   total_items: number = 0;
   imagen = IMAGEN;
   prueba_msj = 'hola vengo del padre';
-  lista_productos: Array<object>;
   clientes ;
   card_valid: boolean = true;
   selected_client: number = 1;
@@ -33,24 +34,23 @@ export class CsTabComprarComponent implements OnInit {
   }
 
   ngOnInit() {
-    let storage_let = this.storage.getOnLocalStorage()
-    // console.log('storage let')
-    // console.log(storage_let);
-    this.total_ingreso = storage_let
-      .map( (item) => {
-        return this.obtener_moneda(item.precio)
-      })
-      .reduce( (acc, val) => {
-        return acc + val;
-      }, 0);
-    // this.t  
+    // this.storage.getOnLocalStorage();
+    let result = this.storage.getOnLocalStorageObservable()
+      .subscribe( res => {
+        this.total_ingreso = res
+          .map(item => this.obtener_moneda(item.precio))
+          .reduce( (acc, val) => acc+val, 0)
+      });
+    // this.total_ingreso = storage_let;
+    console.log('this.total_ingreso');
+    console.log(this.total_ingreso);
+    //   .map( (item) => {
+    //     return this.obtener_moneda(item.precio)
+    //   })
     //   .reduce( (acc, val) => {
     //     return acc + val;
-    //   }, 0)
-    // console.log('map ingreso');
-    // console.log(this.total_ingreso)
-    this.total_ingreso_calculo = this.total_ingreso; 
-    // console.log(this.total_ingreso_calculo)
+    //   }, 0);
+    // this.total_ingreso_calculo = this.total_ingreso; 
   }
 
   valor() {
@@ -114,15 +114,8 @@ export class CsTabComprarComponent implements OnInit {
 
   
   calcular_monto(valor) {
-    // console.log('el valor enviado es')
-    // console.log(valor)
     valor = this.obtener_moneda(valor)
-    // console.log(valor)
-    // console.log('estamos en calcular mont0')
-    // console.log(this.total_ingreso);
-    // t
     this.total_ingreso+= valor;
-      // console.log(this.total_ingreso)
   }
 
   valid() {
@@ -139,9 +132,6 @@ export class CsTabComprarComponent implements OnInit {
     let precio;
     // console.log(money);}
     precio = money.slice(1, money.length);
-    // console.log('money');
-    // console.log(precio);
-    // if (money[0])
     // if (money[ money.length - 1 ] ) {
     //   precio = money.slice(0, money.length  - 1);
     // }
@@ -151,7 +141,6 @@ export class CsTabComprarComponent implements OnInit {
     // if (money.search(',') != -1) {
     //     precio = precio.replace(",",".")
     // }
-    // console.log(precio)
     // console.log(precio)
     return parseFloat(precio);
   }
