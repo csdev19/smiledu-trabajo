@@ -16,7 +16,7 @@ export class RestService {
 
   }
 
-//    MOSTRAR 
+//////////////    MOSTRAR 
 
   getMostrarClienteDB():Observable<any> {
     // console.log(this.url+'ver-clientes')
@@ -40,10 +40,10 @@ export class RestService {
   }
   getMostrarVentasDB():Observable<any> {
     // console.log(this.url+'ver-ventas')
-    return this.http.get(this.url+'sales/ver-ventas').pipe (map(res => res));
+    return this.http.get(this.url+'sales/ver-ventas').pipe(map(res => res));
   }
 
-//            AGREGAR
+///////////////     AGREGAR
 
   agregarCliente(nuevoCliente): Observable<any> {
     return this.http.post(`${this.url}clientes/agregar-clientes`, nuevoCliente, httpOptions)
@@ -70,7 +70,7 @@ export class RestService {
     return this.http.post(`${this.url}sales/venta-carrito`, lista_venta, httpOptions)
   }
 
-//              ACTUALIZAR
+/////////////////     ACTUALIZAR
 actualizarProducto(obj): Observable<any> {
   // console.log("llamaste a la api");
   return this.http.put(`${this.url}products/actualizar-producto`, obj, httpOptions)
@@ -79,7 +79,7 @@ actualizarProducto(obj): Observable<any> {
 
 
 
-//            ELIMINAR
+/////////////////     ELIMINAR
 eliminarCliente(id) {
   return this.http.delete(`${this.url}products/eliminar-producto/${id}`,httpOptions)
     .pipe(map(res => res));
@@ -90,9 +90,6 @@ eliminarCliente(id) {
   //     .pipe(map(res => res));
   // }
 
-  
-
-  
 }
 
 

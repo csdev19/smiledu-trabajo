@@ -6,7 +6,6 @@ export interface CategoriaElemento {
   nombre_categoria: string;
 }
 
-
 @Component({
   selector: 'app-cs-form-categoria',
   templateUrl: './cs-form-categoria.component.html',
@@ -17,10 +16,12 @@ export class CsFormCategoriaComponent implements OnInit {
   msj = 'Mostrar Formulario de Categorias';
   nombre_categoria: string;
 
-  constructor(private restService: RestService, public dialog: MatDialog) { }
+  constructor(
+    private restService: RestService, 
+    public dialog: MatDialog
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CsFormCategoriaDialogComponent, {
@@ -32,23 +33,9 @@ export class CsFormCategoriaComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       this.nombre_categoria = result;
-      // if (this.itsEmpty(result)){
-      //   // cuando esta vacio
-      // } else {
-      //   this.setCategoria(result)
-      // }
     });
   }
-  
-  // itsEmpty(obj){
-  //   let value = false;
-  //   for (let i of obj) {
-  //     if (obj[]) {
-        
-  //     }
-  //   }
-  //   return value;
-  // }
+
 
   setCategoria(nombre_categoria: string): void {
     this.categoria_nueva = {
@@ -57,15 +44,10 @@ export class CsFormCategoriaComponent implements OnInit {
   }  
   
   crearCategoria(): boolean{
-    console.log(this.categoria_nueva);
+    // console.log(this.categoria_nueva);
     
     this.restService.agregarCategoria(this.categoria_nueva)
-      .subscribe(result => {
-        // console.log(result);
-        return 'work';
-      },error => {
-        // console.log(error);
-      })
+      .subscribe(result => 'work',error => 'not work')
     this.categoria_nueva = null;
     return false;
   }
@@ -84,6 +66,5 @@ export class CsFormCategoriaDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 
 }

@@ -9,8 +9,6 @@ export interface ProductoElemento {
   id_categoria:	number
 }
 
-
-
 @Component({
   selector: 'app-cs-form-producto',
   templateUrl: './cs-form-producto.component.html',
@@ -29,19 +27,14 @@ export class CsFormProductoComponent implements OnInit {
   
 
   constructor(private restService: RestService, public dialog: MatDialog) {
-    
     this.restService.getMostrarCategoriaDB()
       .subscribe(categorias => {
         this.categorias = categorias;
       });
-
-
   }
 
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
   
   openDialog(): void {
     const dialogRef = this.dialog.open(CsFormProductoDialogComponent, {
@@ -55,34 +48,20 @@ export class CsFormProductoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
-      // this.nombre_categoria = result;
+      // console.log('The dialog was closed');
+      // console.log(result);
       this.producto_nuevo = result;
-      
     });
   }
 
-
-
-
   crearProducto() {
-    console.log(this.producto_nuevo);
+    // console.log(this.producto_nuevo);
     
-    this.restService.agregarProducto(this.producto_nuevo).subscribe(
-      result => {
-        // console.log(result);
-        return 'work';
-      }, 
-      error => {
-        // console.log(error);
-      }
-      )
+    this.restService.agregarProducto(this.producto_nuevo)
+    .subscribe(result => 'work', error => 'not work')
     this.producto_nuevo = null;
-
     return false;
   }
-
 
 }
 
@@ -93,9 +72,8 @@ export class CsFormProductoComponent implements OnInit {
 export class CsFormProductoDialogComponent {
   categorias;
   categoria_id;
+  id_categoria: number;
 
-  id_categoria;
-  
 
   constructor(
     private restService: RestService, public dialogRef: MatDialogRef<CsFormProductoDialogComponent>,

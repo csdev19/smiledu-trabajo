@@ -45,8 +45,7 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
     public snackBar: MatSnackBar
   ) {}
   
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CsFormClientDialogComponent, {
@@ -55,7 +54,6 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
         exito: false
       }
     });
-
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -67,8 +65,6 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
       }
     });
   }
-
-
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -86,18 +82,13 @@ export class CsFormClientComponent implements OnInit, MatInputModule {
   styleUrls: ['./cs-form-client-dialog.component.css']
 })
 export class CsFormClientDialogComponent {
-  // nombres = new FormControl('');
-  // correo = new FormControl('');
-  // apellidos = new FormControl('');
-  // direccion = new FormControl('');
-
+  
   clienteForm = this.fb.group ({
     'nombres': ['', Validators.required],
     'apellidos': ['', Validators.required],
     'correo': ['', Validators.email],
     'direccion': ['', Validators.required],
     'to_char': [new Date(), Validators.required]
-    // date: [new Date()]
   })
 
   constructor(
@@ -105,7 +96,7 @@ export class CsFormClientDialogComponent {
     public dialogRef: MatDialogRef<CsFormClientDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ClienteElemento,
     private fb: FormBuilder
-    ) {}
+  ) {}
 
     get nombres() { return this.clienteForm.get('nombres'); }
     get apellidos() { return this.clienteForm.get('apellidos'); }
@@ -120,10 +111,11 @@ export class CsFormClientDialogComponent {
 
 
   setClient() {
+    // seteamos los datos con el formato necesario
+    // en este caso solo seteamos la fecha
     let datos = this.clienteForm.value;
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     this.clienteForm.value.to_char = datos.to_char.toLocaleDateString("en-En", options);;
-    // console.log(this.clienteForm.value);
   }
   
   
@@ -132,7 +124,7 @@ export class CsFormClientDialogComponent {
     this.setClient();
     this.restService.agregarCliente(this.clienteForm.value).subscribe(
         result => {
-          console.log(' hola esto funciono ');
+          // console.log(' hola esto funciono ');
 
           if(result) {
             console.log(result);
@@ -140,11 +132,9 @@ export class CsFormClientDialogComponent {
           } else {
             // this.openSnackBar('Cliente', 'Hubo un error');
           }
-        }, 
-        error => {
-            console.log(error);
-        }
-    );
+        }, error => {
+          console.log(error)
+        });
   }
 
   getErrorEmpty() {

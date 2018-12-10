@@ -18,38 +18,22 @@ export class CsCardElementoCompraComponent implements OnInit, OnChanges {
   @Input() valid_card;
   @Output() resolve = new EventEmitter(); 
 
-  constructor(
-  ) {
-    // console.log(MAX_AMOUNT);
-    // console.log(MAX_SALES);
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  ngOnChanges() {
-    // console.log('estamos en card');
-    // console.log(this.valid_card);
-  }
+  ngOnChanges() {}
   
   ver() {
     console.log(this.valid_card);
-    // console.log(this.msj);
-    // console.log(this.producto_item);
   }
+
   agregar() {
-    // console.log('estamos en card')
-    // console.log(this.producto_item)
-    // // console.log('cliente es: ', this.id_cliente);
-    this.producto_item['id_cliente'] = this.id_cliente;
     this.producto_item['precio_venta'] = this.producto_item.precio;
-    // console.log(this.producto_item)
     this.cardEmitter();
-    console.log(this.valid_card);
   }  
 
   cardEmitter() {
-    console.log('se devolvio '+ this.producto_item);
     this.resolve.emit(this.producto_item);
   }
 

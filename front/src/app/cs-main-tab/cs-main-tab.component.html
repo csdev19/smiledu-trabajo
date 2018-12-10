@@ -3,10 +3,20 @@
   <mat-tab label="Comprar"> 
     <app-cs-tab-comprar></app-cs-tab-comprar>
   </mat-tab>
-  <mat-tab label="Clientes"> </mat-tab>Content 1 
-  <mat-tab label="Categorias"> </mat-tab>Content 2 
-  <mat-tab label="Productos"> </mat-tab>Content 3 
-  <mat-tab label="hola">
+  <mat-tab label="Clientes"> 
+    <app-cs-form-client></app-cs-form-client>
+    <app-cs-table-client></app-cs-table-client>
+  </mat-tab>
+  <mat-tab label="Categorias"> 
+    <app-cs-form-categoria></app-cs-form-categoria>
+    <app-cs-table-categoria></app-cs-table-categoria>
+  </mat-tab>
+  <mat-tab label="Productos"> 
+    <app-cs-form-producto></app-cs-form-producto>
+    <app-cs-table-producto></app-cs-table-producto>
+  </mat-tab>
+  <mat-tab label="Ventas">
     <app-cs-form-venta></app-cs-form-venta>
+    <app-cs-table-ventas></app-cs-table-ventas>
   </mat-tab>
 </mat-tab-group>

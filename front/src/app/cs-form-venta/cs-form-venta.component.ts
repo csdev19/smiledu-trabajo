@@ -74,20 +74,8 @@ export class CsFormVentaComponent implements OnInit {
   }
 
   crearVenta() {
-    // console.log(this.id_cliente)
-    // console.log(this.id_producto)
-    // console.log(this.precio)
 
-
-
-    // let venta = {
-    //     'id_producto': this.id_producto,
-    //     'id_cliente': this.id_cliente,
-    //     'precio': this.precio
-    // };
-
-
-    console.log(this.venta_nueva);
+    // console.log(this.venta_nueva);
     
     this.restService.crearVenta(this.venta_nueva).subscribe(
       result => {
@@ -114,9 +102,6 @@ export class CsFormVentaComponent implements OnInit {
   templateUrl: './cs-form-venta-dialog.component.html',
 })
 export class CsFormVentaDialogComponent implements OnInit {
-  // @ViewChild('id_producto') id_producto;
-  // @ViewChild('id_cliente') id_cliente;
-  // @ViewChild('categoria_producto') categoria_producto;
   msj: string = 'Mostrar formulario de Ventas';
   seeForm: boolean = false;
   
@@ -147,12 +132,9 @@ export class CsFormVentaDialogComponent implements OnInit {
       this.productos = productos;
     });
 
-
-
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 
   setSale () {
