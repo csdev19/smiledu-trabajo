@@ -12,7 +12,7 @@ const IMAGEN = 'http://www.cartonfast.com/wp-content/uploads/2016/06/caja_de_car
 }) 
 export class CsTabComprarComponent implements OnInit {
   lista_productos: Array<object>;
-  
+  id_cliente: number = 1;
   cambios: boolean;
   total_ingreso;
   total_ingreso_calculo: number = 0;
@@ -31,6 +31,7 @@ export class CsTabComprarComponent implements OnInit {
 
     this.restService.getMostrarClienteDB()
       .subscribe(clientes => this.clientes = clientes);  
+    
   }
 
   ngOnInit() {
@@ -71,6 +72,9 @@ export class CsTabComprarComponent implements OnInit {
   getOutput(event) {
     this.cambios = !this.cambios;
     this.total_items++;
+    console.log('tab comprar')
+    console.log(event)
+    event['id_cliente'] = this.id_cliente;
     this.calcular_monto(event.precio);
     this.agregarEvento(event);
   }

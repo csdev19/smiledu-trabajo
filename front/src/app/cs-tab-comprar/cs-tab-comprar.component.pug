@@ -2,8 +2,11 @@
 //- img([src]="imagen", alt="")
 
 //- button( (click)='borrar()') borrar
-div
-    
+
+mat-form-field
+    mat-select([(value)]="id_cliente")
+        mat-option(*ngFor="let cliente of clientes",  [value]="cliente.id_cliente") {{ cliente.nombres }}
+
 div.comp(*ngFor='let producto of lista_productos')
     app-cs-card-elemento-compra([valid_card]='card_valid',[producto_item]='producto', (resolve)='getOutput($event)')
 

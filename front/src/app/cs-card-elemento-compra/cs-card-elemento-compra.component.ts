@@ -18,9 +18,14 @@ export class CsCardElementoCompraComponent implements OnInit, OnChanges {
   @Input() valid_card;
   @Output() resolve = new EventEmitter(); 
 
-  constructor() {}
-
-  ngOnInit() {}
+  constructor() {
+  }
+  
+  ngOnInit() {
+    
+    // console.log('ngoninit')
+    // console.log(this.producto_item)
+  }
 
   ngOnChanges() {}
   
