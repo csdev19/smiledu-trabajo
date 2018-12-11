@@ -66,11 +66,18 @@ export class CsTabComprarComponent implements OnInit {
 
   getOutput(event) {
     this.cambios = !this.cambios;
-    this.total_items++;
+    // if ()
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// AGREGAR LOGICA ANTES DE AGREGARLO
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+this.total_items++;
     // console.log('tab comprar')
     // console.log(event)
-    event['id_cliente'] = this.id_cliente;
     this.calcular_monto(event.precio);
+    event['id_cliente'] = this.id_cliente;
     this.agregarEvento(event);
   }
 
@@ -89,7 +96,7 @@ export class CsTabComprarComponent implements OnInit {
       this.invalid();
     }
   }
-  
+
   agregarEvento (event) {  
     // se agrega si las restricciones lo permiten
     if( this.total_ingreso <= MAX_AMOUNT && this.total_items < MAX_SALES ) {
