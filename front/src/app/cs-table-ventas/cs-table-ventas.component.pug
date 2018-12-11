@@ -1,5 +1,6 @@
-button(mat-stroked-button, color='accent', (click)='isVisible()') {{ msj }}
-div(*ngIf='seeTable')
+//- button(mat-stroked-button, color='accent', (click)='isVisible()') {{ msj }}
+button(mat-raised-button, color='accent', (click)='refresh()') Actualizar
+div()
   table(mat-table, [dataSource]='ventas')
     ng-container(matColumnDef='nombre_producto')
       th(mat-header-cell, *matHeaderCellDef)  Nombre Producto 
@@ -16,6 +17,5 @@ div(*ngIf='seeTable')
       //- tr
     tr(mat-header-row, *matHeaderRowDef='atributosVenta; sticky: true')
     tr(mat-row, *matRowDef='let row; columns: atributosVenta;')
-  button(mat-raised-button, color='accent', (click)='refresh()') Actualizar
     //- tbody
   //- // <button (click)="setListSales()">ver</button>

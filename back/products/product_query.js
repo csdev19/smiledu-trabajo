@@ -2,12 +2,11 @@
 function getProductsTabla() {
     return new Promise((resolve, reject) => {
         let sql = `
-        select p.id_producto,
+        SELECT p.id_producto,
             p.nombre_producto,
             p.precio,
             c.nombre_categoria,
-            c.id_categoria from productos p,
-                             categorias c where c.id_categoria = p.id_categoria;`;
+            c.id_categoria FROM productos p, categorias c where c.id_categoria = p.id_categoria;`;
         global.dbp.any(sql)
         .then(res => {
             return resolve(res);

@@ -18,7 +18,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 // import {MatFormFieldModule} from '@angular/material/form-field';
 // import {MatFormFieldModule} from '@angular/material/form-field';
@@ -94,7 +94,8 @@ import { CsTablaCarritoComponent, CsTablaCarritoDialogComponent } from './cs-tab
     MatTabsModule,
     MatCardModule,
     StorageServiceModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule
     // MatMomentDateModule
   ],
   exports: [

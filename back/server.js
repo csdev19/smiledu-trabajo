@@ -8,7 +8,6 @@ const categories = require('./categories/categories');
 const clients = require('./clients/clients');
 const sales = require('./sales/sales');
 const products = require('./products/products');
-
 const category_q = require('./categories/categories_query')
 
 

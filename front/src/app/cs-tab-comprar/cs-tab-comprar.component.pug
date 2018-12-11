@@ -12,7 +12,7 @@ div.comp(*ngFor='let producto of lista_productos')
 
 div.tabla
     //- div(*ngIf='noExiste()')
-    app-cs-tabla-carrito([cambiado]='cambios',[total_ingreso]="total_ingreso",(resta_elemento)='recibirEliminado($event)')
+    app-cs-tabla-carrito([cambiado]='cambios',[total_ingreso]="total_ingreso",[total_items]='total_items',(resta_elemento)='recibirEliminado($event)'
 
 
 br

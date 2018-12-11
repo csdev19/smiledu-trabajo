@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, DoCheck, AfterContentInit } from '@angular/core';
 import { RestService } from '../rest.service';
 
 interface Venta {
@@ -14,7 +14,7 @@ interface Venta {
   styleUrls: ['./cs-table-ventas.component.css']
 })
 
-export class CsTableVentasComponent implements OnInit {
+export class CsTableVentasComponent implements OnInit, OnChanges {
   ventas;
   productos;
   clientes;
@@ -22,18 +22,25 @@ export class CsTableVentasComponent implements OnInit {
   seeTable: boolean = false;
   msj: string = 'Mostrar Tabla de Ventas'
   sales_titles: Array<string> = ['id_producto','id_cliente','fecha_compra','precio_venta',]
+  atributosVenta = ["nombre_producto","nombres","precio_venta","to_char"]
   
-  constructor(private restService: RestService) {
-    
+  constructor(private restService: RestService) {}
+    // console.log('hola esto se creo en que mone
+ 
+  ngOnInit() {
     this.restService.getMostrarVentasDB()
       .subscribe(ventas => {
-        this.ventas = ventas;
+      this.ventas = ventas;
         // console.log(this.ventas);
-      });
- 
-      // this.setListSales();
+    });
+
+      // this.refresh();
+  }
+    
+    ngOnChanges() {
+      console.log('hola esto se creo en que monento ?')
+
     }
-  atributosVenta = ["nombre_producto","nombres","precio_venta","to_char"]
 
 
     refresh () {
@@ -44,30 +51,11 @@ export class CsTableVentasComponent implements OnInit {
       });
     }
 
-    // for (let row of this.id_productos) {
-    //   // console.log(row)
-    //   if(row.id_producto == this.id_producto) {
-    //     this.categoria = row.id_categoria;
-    //     this.precio = row.precio;
-    //   }
 
-    // setListSales(){
-    //   let lista_aux = [];
-    //   for (let row of this.ventas) {
-    //     lista_aux.push(row.fecha_compra);
-    //   }
-
-    //   // this.ventas.sort();
-    //   // console.log(this.ventas);
-    // }
-    
-    ngOnInit() {
-    }
-    
-
+   
   verVentas(){
 
-    console.log(this.ventas);
+    // console.log(this.ventas);
   } 
   isVisible () {
     this.seeTable = !this.seeTable;

@@ -1,5 +1,5 @@
-button(mat-stroked-button, color='accent', (click)='isVisible()') {{ msj }}
-div(*ngIf='seeTable')
+//- button(mat-stroked-button, color='accent', (click)='isVisible()') {{ msj }}
+div()
   table(mat-table, [dataSource]='productos')
     ng-container(matColumnDef='id_producto')
       th(mat-header-cell, *matHeaderCellDef)  id 

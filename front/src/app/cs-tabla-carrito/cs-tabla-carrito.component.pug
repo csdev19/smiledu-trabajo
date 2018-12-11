@@ -1,13 +1,9 @@
-//- div.mat-elevation-z8
-button( (click)='vaciarStorage()') Borrar
-button( (click)='mostrar()') Mostrar
+
+//- button( (click)='vaciarStorage()') Borrar
+//- button( (click)='mostrar()') Mostrar
 
 div.tabla(*ngIf='dataSource')
   table(mat-table, [dataSource]="dataSource", matSort)
-    //- ng-container(matColumnDef="ids")
-    //-   th(mat-header-cell, *matHeaderCellDef, mat-sort-header) IDS  
-    //-   td(mat-cell, *matCellDef="let row") {{row.ids}} 
-
     ng-container(matColumnDef="id_categoria")
       th(mat-header-cell, *matHeaderCellDef, mat-sort-header) id_categoria  
       td(mat-cell, *matCellDef="let row") {{row.id_categoria}} 
@@ -41,19 +37,8 @@ div.tabla(*ngIf='dataSource')
         //- button(mat-raised-button color="warn", (click)='mostrarItem(row)') Borrar 
       td(mat-footer-cell *matFooterCellDef)  
 
-
-    //- ng-container(matColumnDef="item")
-    //-   th(mat-header-cell, *matHeaderCellDef, mat-sort-header) item  
-    //-   td(mat-footer-cell *matFooterCellDef) Total 
-    //-   td(mat-cell, *matCellDef="let row") total
-
-    //- ng-container(matColumnDef="cost")
-    //-   th(mat-footer-cell, *matFooterCellDef) 1000 
-    //-   td(mat-cell, *matCellDef="let row") dasdsa
-
     tr(mat-header-row *matHeaderRowDef="displayedColumns")
     tr(mat-row *matRowDef="let row; columns: displayedColumns;")
     tr(mat-footer-row *matFooterRowDef="displayedColumns;sticky: true")
-    //- tr(mat-footer-row *matFooterRowDef="displayedFooterColumns; sticky: true")
-  //- mat-paginator([pageSizeOptions]="[2,3,5, 10, 25, 100]")
+
 button(mat-raised-button color="warn", (click)="openDialog()") Comprar

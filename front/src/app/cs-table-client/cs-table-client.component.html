@@ -1,6 +1,5 @@
 
-<button mat-stroked-button color="accent" (click)="isVisible()">{{ msj }}</button>
-<div class="table-client" *ngIf="seeTable">
+<div class="table-client">
   <table mat-table [dataSource]="clientes">
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef> Nombre </th>

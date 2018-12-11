@@ -1,5 +1,6 @@
 import { Component, OnInit,OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import {  MAX_AMOUNT, MAX_SALES } from '../constantes';
+import {MatSnackBar} from '@angular/material';
 
 const IMAGEN = 'http://www.cartonfast.com/wp-content/uploads/2016/06/caja_de_carton_cartonfast_americana-750x750.jpg';
 
@@ -18,8 +19,7 @@ export class CsCardElementoCompraComponent implements OnInit, OnChanges {
   @Input() valid_card;
   @Output() resolve = new EventEmitter(); 
 
-  constructor() {
-  }
+  constructor(public snackBar: MatSnackBar) {}
   
   ngOnInit() {
     
@@ -27,8 +27,15 @@ export class CsCardElementoCompraComponent implements OnInit, OnChanges {
     // console.log(this.producto_item)
   }
 
-  ngOnChanges() {}
+  ngOnChanges() {
+    if(!this.valid_card) {
+      setTimeout(() => {
+        this.openSnackBar('El numero de elementos en el carro','Pasó las restricciones',1000);
+      }, 250);
+    } 
+  }
   
+
   ver() {
     console.log(this.valid_card);
   }
@@ -40,6 +47,12 @@ export class CsCardElementoCompraComponent implements OnInit, OnChanges {
 
   cardEmitter() {
     this.resolve.emit(this.producto_item);
+  }
+
+  openSnackBar(message: string, action: string, time: number) {
+    this.snackBar.open(message, action, {
+      duration: time,
+    });
   }
 
 }

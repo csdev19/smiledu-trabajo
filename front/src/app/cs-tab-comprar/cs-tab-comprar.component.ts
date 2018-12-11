@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { RestService } from '../rest.service';
 import { StorageHandlerService} from '../storage-handler.service';
 import {  MAX_AMOUNT, MAX_SALES } from '../constantes';
@@ -43,16 +43,11 @@ export class CsTabComprarComponent implements OnInit {
           .reduce( (acc, val) => acc+val, 0)
       });
     // this.total_ingreso = storage_let;
-    console.log('this.total_ingreso');
-    console.log(this.total_ingreso);
-    //   .map( (item) => {
-    //     return this.obtener_moneda(item.precio)
-    //   })
-    //   .reduce( (acc, val) => {
-    //     return acc + val;
-    //   }, 0);
-    // this.total_ingreso_calculo = this.total_ingreso; 
+    // console.log('this.total_ingreso');
+    // console.log(this.total_ingreso);
+
   }
+
 
   valor() {
     // this.valorCambio = !this.valorCambio;
@@ -64,7 +59,7 @@ export class CsTabComprarComponent implements OnInit {
     // console.log('event eliminar');
     // console.log(event);
     this.total_ingreso -= this.obtener_moneda(event.precio)
-    console.log(this.total_ingreso);
+    // console.log(this.total_ingreso);
     // this.funciona(event);
     this.eliminarEvento(event);
   }
@@ -72,16 +67,15 @@ export class CsTabComprarComponent implements OnInit {
   getOutput(event) {
     this.cambios = !this.cambios;
     this.total_items++;
-    console.log('tab comprar')
-    console.log(event)
+    // console.log('tab comprar')
+    // console.log(event)
     event['id_cliente'] = this.id_cliente;
     this.calcular_monto(event.precio);
     this.agregarEvento(event);
   }
+
   eliminarEvento (event) {
     if( this.total_ingreso <= MAX_AMOUNT && this.total_items < MAX_SALES ) {
-      // console.log('this.total_ingreso');
-      // console.log(this.total_ingreso);
       // this.storage.storeOnLocalStorage(event);
       // this.storage.storeOnLocalStorage(event);
       this.valid()
@@ -90,10 +84,12 @@ export class CsTabComprarComponent implements OnInit {
       // console.log('cuando isvalid es falso')
       // console.log(this.total_ingreso);
       this.restarMonto(event.precio);
+      this.total_items--;
       // console.log(this.total_ingreso);
       this.invalid();
     }
   }
+  
   agregarEvento (event) {  
     // se agrega si las restricciones lo permiten
     if( this.total_ingreso <= MAX_AMOUNT && this.total_items < MAX_SALES ) {

@@ -1,5 +1,5 @@
-button(mat-stroked-button, color='accent', (click)='isVisible()') {{ msj }}
-.table-client(*ngIf='seeTable')
+//- button(mat-stroked-button, color='accent', (click)='isVisible()') {{ msj }}
+.table-client()
   table(mat-table, [dataSource]='clientes')
     ng-container(matColumnDef='nombre')
       th(mat-header-cell, *matHeaderCellDef)  Nombre 

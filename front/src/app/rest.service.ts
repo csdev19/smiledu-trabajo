@@ -34,7 +34,7 @@ export class RestService {
   }
   getMostrarVentasDB():Observable<any> {
     // console.log(this.url+'ver-ventas')
-    return this.http.get(this.url+'sales/ver-ventas').pipe(map(res => res));
+    return this.http.get(this.url+'sales/ver-ventas');
   }
 
 ///////////////     AGREGAR
@@ -59,8 +59,8 @@ export class RestService {
   }
   
   agregarComprasCarrrito(lista_venta): Observable<any> {
-    console.log('estas en el rest');
-    console.log(lista_venta);
+    // console.log('estas en el rest');
+    // console.log(lista_venta);
     return this.http.post(`${this.url}sales/venta-carrito`, lista_venta, httpOptions)
   }
 

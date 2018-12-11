@@ -1,6 +1,5 @@
 
-<button mat-stroked-button color="accent" (click)="isVisible()">{{ msj }}</button>
-<div *ngIf="seeTable">
+<div>
   <table mat-table [dataSource]="productos">
     <ng-container matColumnDef="id_producto">
       <th mat-header-cell *matHeaderCellDef> id </th>
