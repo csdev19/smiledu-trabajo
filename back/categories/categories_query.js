@@ -14,7 +14,7 @@ function getCategories() {
 
 function addCategories(categoria) {
     // console.log('llamaste a crearcategoria');
-   //  console.log(categoria);
+    // console.log(categoria);
 
     return new Promise((resolve , reject) => {
         let sql = `INSERT INTO public.categorias(

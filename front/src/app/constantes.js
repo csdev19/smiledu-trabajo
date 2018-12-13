@@ -1,6 +1,6 @@
 
-const MAX_SALES = 10;
-const MAX_AMOUNT = 10000000;
+const MAX_SALES = 5;
+const MAX_AMOUNT = 550;
 
 
 module.exports = {

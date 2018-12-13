@@ -32,7 +32,15 @@ export class CsFormCategoriaComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-      this.nombre_categoria = result;
+      let obj = {
+        'nombre_categoria': result
+      }
+      console.log(obj);
+      // this.nombre_categoria = result;
+      this.restService.agregarCategoria(obj)
+        .subscribe( 
+          res => console.log('hola'),
+          err => console.log('das'));
     });
   }
 

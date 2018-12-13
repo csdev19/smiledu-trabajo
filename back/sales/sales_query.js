@@ -81,8 +81,8 @@ function getCorrelativo(id_producto,id_cliente) {
             })
             .catch(err => {
             //  reject({error : 'getCorrelativo =>'+ err});
-            reject({error : 'getCorrelativo =>'});
-        });
+                reject({error : 'getCorrelativo =>'});
+            });
     });
 }
 

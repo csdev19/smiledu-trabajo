@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, OnChanges } from '@angular/core';
 import { RestService } from '../rest.service';
 import { StorageHandlerService} from '../storage-handler.service';
 import {  MAX_AMOUNT, MAX_SALES } from '../constantes';
@@ -10,10 +10,9 @@ const IMAGEN = 'http://www.cartonfast.com/wp-content/uploads/2016/06/caja_de_car
   templateUrl: './cs-tab-comprar.component.html',
   styleUrls: ['./cs-tab-comprar.component.css']
 }) 
-export class CsTabComprarComponent implements OnInit {
+export class CsTabComprarComponent implements OnInit, OnChanges {
   lista_productos: Array<object>;
   id_cliente: number = 1;
-  cambios: boolean;
   total_ingreso;
   total_ingreso_calculo: number = 0;
   total_items: number = 0;
@@ -22,6 +21,13 @@ export class CsTabComprarComponent implements OnInit {
   clientes ;
   card_valid: boolean = true;
   selected_client: number = 1;
+  // respuesta card
+  cambios: boolean;
+  // respuesta al carro
+  tabRespuesta;
+  // recibe objeto de carrito
+  eventoCarrito;
+  
   constructor(
     private restService: RestService,
     private storage: StorageHandlerService
@@ -34,18 +40,22 @@ export class CsTabComprarComponent implements OnInit {
     
   }
 
+
   ngOnInit() {
     // this.storage.getOnLocalStorage();
     let result = this.storage.getOnLocalStorageObservable()
       .subscribe( res => {
+        console.log('hla antes de calcular el monto');
+        console.log(res);
         this.total_ingreso = res
           .map(item => this.obtener_moneda(item.precio))
           .reduce( (acc, val) => acc+val, 0)
       });
-    // this.total_ingreso = storage_let;
-    // console.log('this.total_ingreso');
-    // console.log(this.total_ingreso);
 
+  }
+
+  ngOnChanges() {
+    console.log('>>>>>>>>>>>>>>>>>>>>>> hola cambe ><<<<<<<<<<<<<<<<<')
   }
 
 
@@ -66,67 +76,102 @@ export class CsTabComprarComponent implements OnInit {
 
   getOutput(event) {
     this.cambios = !this.cambios;
-    // if ()
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    console.log(event);
+    this.tabRespuesta = {
+      'agregado': true,
+      'item_agregado': event
+    }
 
-
-// AGREGAR LOGICA ANTES DE AGREGARLO
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-this.total_items++;
-    // console.log('tab comprar')
-    // console.log(event)
-    this.calcular_monto(event.precio);
+    // this.accionCompraRealizada(event)
     event['id_cliente'] = this.id_cliente;
     this.agregarEvento(event);
   }
 
-  eliminarEvento (event) {
-    if( this.total_ingreso <= MAX_AMOUNT && this.total_items < MAX_SALES ) {
-      // this.storage.storeOnLocalStorage(event);
-      // this.storage.storeOnLocalStorage(event);
-      this.valid()
 
+  agregarEvento (event) {  
+    // se agrega si las restricciones lo permiten
+    let suma_previa = this.obtenerTotal() + this.obtener_moneda(event.precio) 
+    if( suma_previa <= MAX_AMOUNT && this.total_items < MAX_SALES ) {
+      this.storage.storeOnLocalStorage(event);
+      this.total_items++;
+      this.total_ingreso = this.obtenerTotal(); 
+      this.valid()
+    } 
+    // sino se resta la cantidad aumentada para el calculo
+    else {
+      // this.restarMonto(event .precio);
+      this.invalid();
+    } 
+  }
+
+  obtenerTotal(): number  {
+    return this.storage.getOnLocalStorage()
+      .map( item => this.obtener_moneda(item.precio))
+      .reduce( (acc, val) => acc + val, 0)
+  }
+
+  eliminarEvento () {
+    if( this.total_ingreso <= MAX_AMOUNT && this.total_items < MAX_SALES ) {
+      this.valid()
     } else {
-      // console.log('cuando isvalid es falso')
-      // console.log(this.total_ingreso);
-      this.restarMonto(event.precio);
+      // this.restarMonto(event.precio);
       this.total_items--;
-      // console.log(this.total_ingreso);
       this.invalid();
     }
   }
 
-  agregarEvento (event) {  
-    // se agrega si las restricciones lo permiten
-    if( this.total_ingreso <= MAX_AMOUNT && this.total_items < MAX_SALES ) {
-      this.storage.storeOnLocalStorage(event);
-      this.valid()
-      // this.storage.storeOnLocalStorage(event);
-    } 
-    // sino se resta la cantidad aumentada para el calculo
-    else {
-      // console.log('cuando isvalid es falso')
-      // console.log(this.total_ingreso);
-      this.restarMonto(event.precio);
-      // console.log(this.total_ingreso);
-      this.invalid();
-    } 
+
+
+  restarMonto(valor): number {
+    return this.total_ingreso + valor;    
   }
 
-  restarMonto(valor) {
-    valor = this.obtener_moneda(valor)
-    this.total_ingreso-= valor;    
+  sumarMonto(valor): number {
+    return this.total_ingreso + valor;    
   }
 
   
   calcular_monto(valor) {
-    valor = this.obtener_moneda(valor)
-    this.total_ingreso+= valor;
+    this.total_ingreso = (valor >= 0) ? this.sumarMonto(valor) : this.restarMonto(valor);
   }
 
   valid() {
     this.card_valid = true;
+  }
+
+  accionCompraRealizada(event) {
+    console.log('tab comprar accion realizadda')
+    console.log(event)
+    // let evento = event;
+    this.handlerEventoCarrito(event)
+    this.eventoCarrito = {}; 
+    // this.total_ingreso = event;
+  }
+
+  handlerEventoCarrito(obj) {
+    console.log(obj);
+    if (obj['borrado']) {
+      let itemRestado = obj['id_borrado'];
+      console.log('itemRestado')
+      console.log(itemRestado)
+      this.storage.deleteOnLocalStorageById(itemRestado);
+      console.log('elemento borrado ',obj['elemento_borrado']);
+      // this.valid();
+      this.eliminarEvento();
+      // this.restarMonto(obj['elemento_borrado'] ); 
+
+      this.total_items--;
+
+      this.total_ingreso = this.obtenerTotal();
+      console.log('hola ', this.total_ingreso);
+      this.tabRespuesta = {
+        'borrado' : 'borrado con exito'
+      };
+
+    } 
+    if (obj['comprado']) {
+      console.log('esto ocurro si comprado es true')
+    }
 
   }
 
@@ -135,21 +180,7 @@ this.total_items++;
   }
   
   obtener_moneda(valor){
-    let money = valor;
-    let precio;
-    // console.log(money);}
-    precio = money.slice(1, money.length);
-    // if (money[ money.length - 1 ] ) {
-    //   precio = money.slice(0, money.length  - 1);
-    // }
-    if (money.search(',') != -1) {
-      precio = precio.replace(",","")
-    }
-    // if (money.search(',') != -1) {
-    //     precio = precio.replace(",",".")
-    // }
-    // console.log(precio)
-    return parseFloat(precio);
+    return parseFloat(valor);
   }
   
 

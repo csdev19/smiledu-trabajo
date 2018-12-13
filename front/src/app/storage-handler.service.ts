@@ -16,7 +16,7 @@ export class StorageHandlerService {
     @Inject(SESSION_STORAGE) private storage: StorageService
   ) {
     this.informacion = this.getOnLocalStorageOld();
-    console.log(this.informacion)
+    // console.log(this.informacion)
   }
 
 
@@ -33,12 +33,12 @@ export class StorageHandlerService {
   }
   
   public getOnLocalStorageOld() {
-    console.log(this.storage.get(STORAGE_KEY));
+    // console.log(this.storage.get(STORAGE_KEY));
     return this.storage.get(STORAGE_KEY) || [];
   }
   
   public getOnLocalStorage() {
-    console.log(this.storage.get(STORAGE_KEY));
+    // console.log(this.storage.get(STORAGE_KEY));
     return this.storage.get(STORAGE_KEY) || 'empty';
   }
   

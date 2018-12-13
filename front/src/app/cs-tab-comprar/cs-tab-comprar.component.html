@@ -8,5 +8,5 @@
   <app-cs-card-elemento-compra [valid_card]="card_valid" [producto_item]="producto" (resolve)="getOutput($event)"></app-cs-card-elemento-compra>
 </div>
 <div class="tabla">
-  <app-cs-tabla-carrito [cambiado]="cambios" [total_ingreso]="total_ingreso" (resta_elemento)="recibirEliminado($event)"></app-cs-tabla-carrito>
-</div><br><br><br><br><br><br><br>
+  <app-cs-tabla-carrito [cambiado]="cambios" [eventoTabComprar]="tabRespuesta" (eventoCarrito)="accionCompraRealizada($event)" [total_ingreso]="total_ingreso" [total_items]="total_items" (resta_elemento)="recibirEliminado($event)"></app-cs-tabla-carrito>
+</div>

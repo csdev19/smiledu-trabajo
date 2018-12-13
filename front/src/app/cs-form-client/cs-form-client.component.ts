@@ -115,13 +115,14 @@ export class CsFormClientDialogComponent {
     // en este caso solo seteamos la fecha
     let datos = this.clienteForm.value;
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    this.clienteForm.value.to_char = datos.to_char.toLocaleDateString("en-En", options);;
+    this.clienteForm.value.to_char = datos.to_char.toLocaleDateString("en-En", options);
   }
   
   
   crearCliente() {
     console.log(this.nombres.errors);
     this.setClient();
+    console.log(this.clienteForm.value);
     this.restService.agregarCliente(this.clienteForm.value).subscribe(
         result => {
           // console.log(' hola esto funciono ');

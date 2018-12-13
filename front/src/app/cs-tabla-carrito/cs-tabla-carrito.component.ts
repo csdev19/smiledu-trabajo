@@ -22,16 +22,17 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
   @Input() cambiado = '';
   @Input() total_ingreso = 0;
   @Input() total_items= 0;
+  @Input() eventoTabComprar;
   @Output() resta_elemento = new EventEmitter();
-  @Output() precio_total_actual = new EventEmitter()
-  @Output() estado_compra = new EventEmitter()
+  @Output() eventoCarrito = new EventEmitter();
+  @Output() estado_compra = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
   total: number = 0;
   aceptado : boolean;
   elemento_resta : number;
   lista_compras;
+  compraEvento: object;
 
   displayedColumns: Array<string> = ['id_categoria', 'id_producto', 'nombre_categoria', 'nombre_producto', 'precio', 'id_categ']
   displayedFooterColumns: Array<string> = ['item', 'cost']
@@ -46,23 +47,22 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
     this.OnRefresh();
   }
   
-  ngOnInit() {
-    // console.log('esto se inicio ');
-    // console.log(this.cambiado);
-    this.dataSource.paginator = this.paginator;
-
-    this.dataSource.sort = this.sort;
-  }
+  ngOnInit() {}
 
   ngOnChanges() {
+    // console.log('se cambio');
+    // console.log(this.eventoTabComprar)
+    // console.log('comprar es lo siguete', this.total_ingreso)
+
+    // this.evalTabResponse(this.eventoTabComprar);
     this.OnRefresh();
     // console.log('hola on changes');
 
     if(this.total_ingreso == 0) {
       // console.log('ingreso cero')
-      setTimeout(() => {
-        this.openSnackBar('El total', "Es cero", 2000);
-      }, 250);
+      // setTimeout(() => {
+      //   this.openSnackBar('El total', "Es cero", 2000);
+      // }, 250);
       // this.totalCero();
     }
 
@@ -80,17 +80,40 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
     }
   }
 
-  borrarItem(id) {
-    console.log('se borro');
-    let monto_eliminado = this.storage.getOnLocalStorage()[id];
-    // console.log(monto_eliminado);
-    this.elemento_resta = monto_eliminado;
-    this.delEmitter();
-    this.storage.deleteOnLocalStorageById(id);
-    // console.log('porque no apareces')
-    this.OnRefresh();
+  evalTabResponse(event) {
+    if(event.agregado) {
+
+    }
   }
-  
+
+  compraEmitter(obj) {
+    // console.log('emito un');
+    // console.log(obj);
+    // this.compraEvento = {
+    //   'borrado': false,
+    //   'comprado': false
+    // }
+
+    if (obj['borrado']) {
+      console.log('hola estas en  borrado')
+      // this.compraEvento['borrado'] = true;
+
+    }
+
+    
+    if (obj['comprado']) {
+      // this.compraEvento['comprado'] = true;
+    }
+
+    console.log('antes de emitir evento carrito');
+    this.eventoCarrito.emit(obj);
+    this.compraEvento = {
+      'borrado': false,
+      'comprado': false
+    }
+    // console.log('soy un evento luego de la accion'); 
+  }
+
   delEmitter() {
     // console.log('se devolvio '+ this.producto_item);
     this.resta_elemento.emit(this.elemento_resta);
@@ -98,10 +121,37 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
 
   vaciarStorage() {    
     this.storage.deleteOnLocalStorage();
+    this.OnRefresh();
+    // this.compraEmitter();
     this.total_ingreso = 0;
     this.total_items = 0;
   }
 
+
+  borrarItem(id) {
+    // console.log('se borro');
+    // console.log(id);
+    let monto_eliminado = this.storage.getOnLocalStorage()[id];
+    console.log(monto_eliminado.precio);
+    // console.log(monto_eliminado);
+    let obj = {
+      'borrado': true,
+      'id_borrado': id,
+      'elemento_borrado': -1 * monto_eliminado.precio,
+      'comprado': false
+    }
+    console.log('obj', obj)
+    this.compraEmitter(obj);
+    this.elemento_resta = monto_eliminado;
+    // this.delEmitter();
+    // this.storage.deleteOnLocalStorageById(id);
+    // console.log('porque no apareces')
+    this.OnRefresh();
+  }
+  
+    /////////////////////////////////////////////////////////////////////////
+   //////////////////      DIALOGO DE CONFIRMACION         /////////////////
+  /////////////////////////////////////////////////////////////////////////
   openDialog(): void {
     const dialogRef = this.dialog.open(CsTablaCarritoDialogComponent, {
       width: '250px',
@@ -111,43 +161,26 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
-      // console.log(result);
-      
       if (result == undefined) {
-        // console.log('no acepto');
       } else {
         let lista_compras = this.storage.getOnLocalStorage();
-        // console.log(lista_compras);
         this.lista_compras = lista_compras
         let resultado = this.restService.agregarComprasCarrrito(this.lista_compras).subscribe(
           result => {
-            console.log('agregarComprasCarrrito funciono >>>>>'+result);
-            console.log(result);
-            // return result;
+            // console.log('agregarComprasCarrrito funciono >>>>>'+result);
+            // console.log(result);
+            // // return result;
             this.openSnackBar('La compra', "Fue exitosa",3000);
           }, 
           error => {
-            console.log('error agregarComprasCarrrito>>'+error);
-            console.log(error);
+            // console.log('error agregarComprasCarrrito>>'+error);
+            // console.log(error);
             // return error
             this.openSnackBar('La compra', "Tuvo un fallo",3000);
           });
-        console.log("resultado es :", resultado)
-        
-        // if (resultado == 200 ) {
-        //   console.log('funciona csmre')
-        // }
-
-        // if ( resultado == 500) {
-        //   console.log('fallo') 
-        // }
 
         this.vaciarStorage();
-        // this.storage.deleteOnLocalStorage();
         this.OnRefresh();
-        // console.log(this.total_ingreso)
-        // this.openSnackBar('La compra', "Fue exitosa",4000);
 
       }
     });
@@ -166,7 +199,6 @@ export class CsTablaCarritoComponent implements OnInit, OnChanges ,DoCheck{
   templateUrl: './cs-tabla-carrito-dialog.component.html',
 })
 export class CsTablaCarritoDialogComponent {
-
   constructor(
     public dialogRef: MatDialogRef<CsTablaCarritoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data
