@@ -1,9 +1,9 @@
 INSERT INTO public.clientes(
 	nombres, apellidos, fecha_nacimiento, correo, direccion)
 	VALUES ('cristian', 'sotomayor gonzales', to_date('1998-12-19', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5'),
-	VALUES ('luis', 'sotomayor rivera', to_date('1950-04-24', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5'),
-	VALUES ('maribel', 'gonzales reque', to_date('1945-01-16', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5'),
-	VALUES ('diego', 'sotomayor gonzales', to_date('1998-12-19', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5');
+	, ('luis', 'sotomayor rivera', to_date('1950-04-24', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5'),
+	, ('maribel', 'gonzales reque', to_date('1945-01-16', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5'),
+	, ('diego', 'sotomayor gonzales', to_date('1998-12-19', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5');
 
 INSERT INTO public.clientes(
 	id_cliente, nombres, apellidos, fecha_nacimiento, correo, direccion)
@@ -24,15 +24,15 @@ INSERT INTO public.clientes(
 
 INSERT INTO public.clientes(
 	nombres, apellidos, fecha_nacimiento, correo, direccion)
-	('maribel', 'gonzales reque', to_date('1945-01-16', 'YYYY-MM-DD'), 'maribel04@gmail.com', 'Las Lilas mzn B lote 5');
+	VALUES ('maribel', 'gonzales reque', to_date('1945-01-16', 'YYYY-MM-DD'), 'maribel04@gmail.com', 'Las Lilas mzn B lote 5'),
 
     
-	VALUES ('luis', 'sotomayor rivera', to_date('1950-04-24', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5'),
+	('luis', 'sotomayor rivera', to_date('1950-04-24', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5'),
 
     
     
     
-	VALUES ('cristian', 'sotomayor gonzales', to_date('1998-12-19', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5');
+	('cristian', 'sotomayor gonzales', to_date('1998-12-19', 'YYYY-MM-DD'), 'cristiansotomayor1913@gmail.com', 'Las Lilas mzn B lote 5');
 
 ## consultas varias
 select * from ventas
